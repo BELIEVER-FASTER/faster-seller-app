@@ -21,3 +21,8 @@ export const LoginText = styled.Text`
   font-size: 16px;
   margin-bottom: 70px;
 `;
+
+export const SearchNavBtn = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;

@@ -48,12 +48,12 @@ export const BtnWrapper = styled.TouchableOpacity<{
     disabled &&
     `
     background-color: #948AA8;
-`}
+  `}
   ${({width}) =>
     width &&
     `
     width:${width};
-`}
+  `}
 `;
 export const BtnText = styled.Text<{outlined: boolean; textColor?: string}>`
   color: #fff;
@@ -79,4 +79,21 @@ export const CommonInputText = styled.TextInput`
   padding: 9px;
   border-radius: 6px;
   margin-top: 8px;
+`;
+
+export const SwitchBox = styled.TouchableOpacity`
+  width: 65px;
+  height: 26px;
+  background-color: #aaa;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 26px;
+`;
+export const Circle = styled.View`
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background-color: #fff;
 `;

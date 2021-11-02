@@ -1,11 +1,9 @@
 import AppLoading from "expo-app-loading";
 import {useAssets} from "expo-asset";
 import {useFonts} from "expo-font";
-import {StatusBar} from "expo-status-bar";
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
-import Root from "./navigations/NotLoggedIn/Root";
+import Root from "./navigations/LoggedIn/Root";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -21,23 +19,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Root />
-      {/* <View style={styles.container}>
-        <Text style={styles.text}>안녕하세요</Text>
-        <StatusBar style="auto" />
-      </View> */}
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontFamily: "SpoqaBold",
-    fontSize: 30,
-  },
-});
