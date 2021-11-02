@@ -1,6 +1,12 @@
 import React from "react";
 import {FontAwesome5} from "@expo/vector-icons";
-import {LoginInputContainer, LoginInputBox} from "./styles";
+import {
+  LoginInputContainer,
+  LoginInputBox,
+  CommonInputWrapper,
+  CommonInputText,
+} from "./styles";
+import {Text} from "react-native";
 
 type LoginInputProps = {
   label?: string;
@@ -20,8 +26,17 @@ const LoginInput = ({placeholder, type}: LoginInputProps) => {
   );
 };
 
-function Input() {
-  return <></>;
+type InputProps = {
+  label?: string;
+  placeholder?: string;
+};
+function Input({label, placeholder}: InputProps) {
+  return (
+    <CommonInputWrapper>
+      <Text style={{fontSize: 16}}>{label}</Text>
+      <CommonInputText placeholder={placeholder} placeholderTextColor="#888" />
+    </CommonInputWrapper>
+  );
 }
 
 Input.Login = LoginInput;

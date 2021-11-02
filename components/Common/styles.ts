@@ -27,15 +27,56 @@ export const LoginInputBox = styled.TextInput`
   margin-left: 16px;
 `;
 
-export const BtnWrapper = styled.TouchableOpacity`
-  border: 3px #5b23b2;
+export const BtnWrapper = styled.TouchableOpacity<{
+  width: string;
+  outlined: boolean;
+  disabled: boolean;
+}>`
+  border: 3px rgba(0, 0, 0, 0);
   border-radius: 6px;
+  width: 100%;
   justify-content: center;
   align-items: center;
+  background-color: #33205a;
+  ${({outlined}) =>
+    outlined &&
+    `
+    background-color: rgba(0, 0, 0, 0);
+    border: 3px #33205A;
+  `}
+  ${({disabled}) =>
+    disabled &&
+    `
+    background-color: #948AA8;
+`}
+  ${({width}) =>
+    width &&
+    `
+    width:${width};
+`}
 `;
-export const BtnText = styled.Text`
+export const BtnText = styled.Text<{outlined: boolean; textColor?: string}>`
   color: #fff;
   font-size: 16px;
   padding: 15px;
   font-weight: 600;
+  ${({outlined}) =>
+    outlined &&
+    `
+      color:#33205A;
+  `}
+  ${({textColor}) =>
+    textColor &&
+    `
+      color:${textColor};
+  `}
+`;
+
+export const CommonInputWrapper = styled.View``;
+export const CommonInputText = styled.TextInput`
+  background-color: #eee;
+  font-size: 15px;
+  padding: 9px;
+  border-radius: 6px;
+  margin-top: 8px;
 `;

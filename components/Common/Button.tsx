@@ -17,15 +17,27 @@ type ButtonProps = {
   title: string;
   onPress?: () => void;
   disabled?: boolean;
+  outlined?: boolean;
+  textColor?: string;
+  width?: string;
 };
-function Button({title, onPress = () => null, disabled = false}: ButtonProps) {
+function Button({
+  title = "",
+  onPress = () => null,
+  disabled = false,
+  outlined = false,
+  textColor,
+  width = "100%",
+}: ButtonProps) {
   const pressBtn = () => {
     if (disabled) return;
     onPress();
   };
   return (
-    <BtnWrapper onPress={pressBtn} disabled={disabled}>
-      <BtnText>{title}</BtnText>
+    <BtnWrapper onPress={pressBtn} disabled={disabled} outlined={outlined} width={width}>
+      <BtnText textColor={textColor} outlined={outlined}>
+        {title}
+      </BtnText>
     </BtnWrapper>
   );
 }

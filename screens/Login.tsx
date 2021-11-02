@@ -40,7 +40,7 @@ export default function Login() {
             <View style={{height: 5}} />
             <Input.Login placeholder="비밀번호를 입력해주세요" type="pwd" />
             <View style={{height: 50}} />
-            <Button title="로그인" />
+            <Button title="로그인" outlined textColor="#fff" />
             <LoginBtnWrapper>
               <Button.Login title="회원가입" onPress={go2} />
               <View style={{width: 4, backgroundColor: "#fff", height: "100%"}} />
