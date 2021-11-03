@@ -1,22 +1,27 @@
+import {useNavigation} from "@react-navigation/core";
 import dayjs from "dayjs";
 import React from "react";
 import {Image, Text} from "react-native";
 import {Swipeable} from "react-native-gesture-handler";
 import Switch from "../Common/Switch";
 import {PISummary, PITitle, ProdItemContainer, SwipedItem} from "./styles";
+const renderRightActions = () => {
+  return (
+    <SwipedItem>
+      <Text style={{color: "#fff"}}>삭제</Text>
+    </SwipedItem>
+  );
+};
 
 type ProdItemProps = {item: any};
 export default function ProdItem({item}: ProdItemProps): JSX.Element {
-  const renderRightActions = () => {
-    return (
-      <SwipedItem>
-        <Text style={{color: "#fff"}}>삭제</Text>
-      </SwipedItem>
-    );
+  const navigation = useNavigation();
+  const goDetail = () => {
+    navigation.navigate("DETAIL", {screen: "DETAIL_DETAIL", params: item});
   };
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <ProdItemContainer>
+      <ProdItemContainer onPress={goDetail}>
         <Image
           style={{height: "100%", width: 70, borderRadius: 6}}
           source={{

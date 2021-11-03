@@ -29,8 +29,6 @@ export default function SU2() {
   const go2 = () => {
     navigation.navigate("SIGNUP3");
   };
-  console.log(selectedValue);
-  console.log(open);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <>

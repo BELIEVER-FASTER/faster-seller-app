@@ -35,7 +35,7 @@ export const SearchInput = styled.TextInput`
   flex: 1;
   margin-left: 10px;
 `;
-export const ProdItemContainer = styled.View`
+export const ProdItemContainer = styled.Pressable`
   width: 100%;
   flex-direction: row;
   align-items: center;

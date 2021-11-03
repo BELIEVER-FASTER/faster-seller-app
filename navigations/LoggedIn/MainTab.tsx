@@ -16,7 +16,7 @@ export const Root = () => {
         tabBarActiveBackgroundColor: "#fff",
         tabBarInactiveBackgroundColor: "#fff",
         tabBarStyle: {borderTopColor: "#33205a", borderTopWidth: 0.7},
-        tabBarInactiveTintColor: "#777",
+        tabBarInactiveTintColor: "#aaa",
         tabBarActiveTintColor: "#33205A",
         tabBarLabelPosition: "beside-icon",
         tabBarLabelStyle: {fontSize: 18, fontWeight: "600"},

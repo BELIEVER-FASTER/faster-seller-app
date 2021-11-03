@@ -1,6 +1,7 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import MainTab from "./MainTab";
 import React from "react";
+import DetailStack from "./DetailStack";
 
 const Nav = createNativeStackNavigator();
 export const Root = () => {
@@ -14,6 +15,7 @@ export const Root = () => {
       }}
     >
       <Nav.Screen name="MAIN" component={MainTab} options={{headerShown: false}} />
+      <Nav.Screen name="DETAIL" component={DetailStack} options={{headerShown: false}} />
     </Nav.Navigator>
   );
 };
