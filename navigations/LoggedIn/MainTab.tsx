@@ -35,6 +35,7 @@ export const Root = () => {
         name="상품등록"
         component={Regist}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({color}) => <Ionicons name="add" size={24} color={color} />,
         }}
       />

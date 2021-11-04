@@ -48,56 +48,60 @@ export default function Detail({route, navigation}: DetailData) {
   }, []);
 
   return (
-    <SafeAreaView style={StyleSheet.absoluteFill}>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView>
-        <Images images={ProdDetail.pImages} />
-        <View style={style.container}>
-          <View style={style[1]}>
-            <Text
-              style={style["1.1"]}
-            >{`${ProdDetail.CategoryMain.name} > ${ProdDetail.CategoryMiddle.name}`}</Text>
-            <Text style={style["1.2"]}>{ProdDetail.state === 1 ? "판매중" : "품절"}</Text>
+    <>
+      <StatusBar translucent backgroundColor="#fff" barStyle="dark-content" />
+      <SafeAreaView style={StyleSheet.absoluteFill}>
+        <ScrollView>
+          <Images images={ProdDetail.pImages} />
+          <View style={style.container}>
+            <View style={style[1]}>
+              <Text
+                style={style["1.1"]}
+              >{`${ProdDetail.CategoryMain.name} > ${ProdDetail.CategoryMiddle.name}`}</Text>
+              <Text style={style["1.2"]}>
+                {ProdDetail.state === 1 ? "판매중" : "품절"}
+              </Text>
+            </View>
+            <Text style={style[2]}>{ProdDetail.name}</Text>
+            <Text style={style[3]}>{ProdDetail.price.toLocaleString()} 원</Text>
           </View>
-          <Text style={style[2]}>{ProdDetail.name}</Text>
-          <Text style={style[3]}>{ProdDetail.price.toLocaleString()} 원</Text>
-        </View>
-        <View style={{marginHorizontal: 16}}>
-          <Text style={style.title}>상품색상</Text>
-          <ColorList colors={ProdDetail.ProductColors} />
-        </View>
-        <View style={{marginVertical: 16}}>
-          <Text style={{...style.title, marginLeft: 16}}>상품사이즈</Text>
-          <SizeTable sizes={ProdDetail.ProductSizes} />
-        </View>
-        <View style={style.dContainer}>
-          <Text style={style.title}>소재 혼용률</Text>
-          <Text style={style.value}>{ProdDetail.composition}</Text>
-        </View>
-        <View style={style.dContainer}>
-          <Text style={style.title}>최소주문단위</Text>
-          <Text style={style.value}>
-            {ProdDetail.isPiece === 1 ? "낱장가능" : "낱장불가"}
-          </Text>
-        </View>
-        <View style={style.dContainer}>
-          <Text style={style.title}>제조국</Text>
-          <Text style={style.value}>
-            {ProdDetail.Country.id === 3
-              ? ProdDetail.countryName
-              : ProdDetail.Country.name}
-          </Text>
-        </View>
-        {ProdDetail.detail ? (
-          <View style={style.detailBox}>
-            <Text style={style.title}>디테일</Text>
-            <Text style={style.value}>{ProdDetail.detail}</Text>
+          <View style={{marginHorizontal: 16}}>
+            <Text style={style.title}>상품색상</Text>
+            <ColorList colors={ProdDetail.ProductColors} />
           </View>
-        ) : (
-          <></>
-        )}
-      </ScrollView>
-    </SafeAreaView>
+          <View style={{marginVertical: 16}}>
+            <Text style={{...style.title, marginLeft: 16}}>상품사이즈</Text>
+            <SizeTable sizes={ProdDetail.ProductSizes} />
+          </View>
+          <View style={style.dContainer}>
+            <Text style={style.title}>소재 혼용률</Text>
+            <Text style={style.value}>{ProdDetail.composition}</Text>
+          </View>
+          <View style={style.dContainer}>
+            <Text style={style.title}>최소주문단위</Text>
+            <Text style={style.value}>
+              {ProdDetail.isPiece === 1 ? "낱장가능" : "낱장불가"}
+            </Text>
+          </View>
+          <View style={style.dContainer}>
+            <Text style={style.title}>제조국</Text>
+            <Text style={style.value}>
+              {ProdDetail.Country.id === 3
+                ? ProdDetail.countryName
+                : ProdDetail.Country.name}
+            </Text>
+          </View>
+          {ProdDetail.detail ? (
+            <View style={style.detailBox}>
+              <Text style={style.title}>디테일</Text>
+              <Text style={style.value}>{ProdDetail.detail}</Text>
+            </View>
+          ) : (
+            <></>
+          )}
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 }
 

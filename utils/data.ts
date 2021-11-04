@@ -115,6 +115,8 @@ export const getColor = (
         color: "#fff",
         backgroundSize: "cover",
       };
+    default:
+      return {background: "#fff", color: "#000"};
   }
 };
 
@@ -236,3 +238,9 @@ export const getName = (name: string): string => {
       return "커스텀";
   }
 };
+
+export const countryList = [
+  {id: 1, name: "대한민국"},
+  {id: 2, name: "중국"},
+  {id: 3, name: "그외"},
+];

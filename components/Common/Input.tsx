@@ -5,6 +5,7 @@ import {
   LoginInputBox,
   CommonInputWrapper,
   CommonInputText,
+  ProdInputText,
 } from "./styles";
 import {Text} from "react-native";
 
@@ -26,6 +27,35 @@ const LoginInput = ({placeholder, type}: LoginInputProps) => {
   );
 };
 
+type ProdInputProps = {
+  label?: string;
+  placeholder?: string;
+  onChange?: (e: string) => void;
+  value?: string;
+  multiline?: boolean;
+};
+
+function ProdInput({
+  label,
+  placeholder,
+  value,
+  onChange,
+  multiline = false,
+}: ProdInputProps) {
+  return (
+    <CommonInputWrapper>
+      <Text style={{fontSize: 16, fontWeight: "bold"}}>{label}</Text>
+      <ProdInputText
+        multiline={multiline}
+        onChangeText={onChange}
+        value={value}
+        placeholder={placeholder}
+        placeholderTextColor="#888"
+      />
+    </CommonInputWrapper>
+  );
+}
+
 type InputProps = {
   label?: string;
   placeholder?: string;
@@ -40,5 +70,6 @@ function Input({label, placeholder}: InputProps) {
 }
 
 Input.Login = LoginInput;
+Input.Prod = ProdInput;
 
 export default Input;

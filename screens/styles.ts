@@ -26,3 +26,8 @@ export const SearchNavBtn = styled.View`
   flex-direction: row;
   align-items: center;
 `;
+
+export const RegistContainer = styled.ScrollView`
+  flex: 1;
+  padding: 16px;
+`;

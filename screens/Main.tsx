@@ -55,7 +55,7 @@ export default function Main(): JSX.Element {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <>
-        <StatusBar translucent backgroundColor="#33205a" />
+        <StatusBar translucent backgroundColor="#33205a" barStyle="light-content" />
         <Filter />
         <Search open={searchOpen} />
         <FlatList

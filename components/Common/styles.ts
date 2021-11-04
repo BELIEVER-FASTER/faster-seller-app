@@ -97,3 +97,15 @@ export const Circle = styled.View`
   border-radius: 11px;
   background-color: #fff;
 `;
+export const ProdInputText = styled.TextInput<{multiline: boolean}>`
+  background-color: #eee;
+  font-size: 15px;
+  padding: 6px 9px;
+  border-radius: 6px;
+  margin-top: 8px;
+  ${({multiline}) =>
+    multiline &&
+    `
+    min-height:100px;
+  `}
+`;

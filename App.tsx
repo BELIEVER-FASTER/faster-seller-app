@@ -4,6 +4,9 @@ import {useFonts} from "expo-font";
 import React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import Root from "./navigations/LoggedIn/Root";
+import {QueryClient, QueryClientProvider} from "react-query";
+
+const query = new QueryClient();
 
 export default function App() {
   const [loaded] = useFonts({
@@ -17,8 +20,10 @@ export default function App() {
 
   if (!loaded || !assets) return <AppLoading />;
   return (
-    <NavigationContainer>
-      <Root />
-    </NavigationContainer>
+    <QueryClientProvider client={query}>
+      <NavigationContainer>
+        <Root />
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }

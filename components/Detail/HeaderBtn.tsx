@@ -32,11 +32,20 @@ function EditBtn({onPress}: HeaderBtnProps) {
   );
 }
 
+function SaveBtn({onPress}: HeaderBtnProps) {
+  return (
+    <HeaderBtnBox style={{marginRight: 16}} onPress={onPress}>
+      <HeaderBtnText>저장</HeaderBtnText>
+    </HeaderBtnBox>
+  );
+}
+
 function HeaderBtn() {
   return <></>;
 }
 
 HeaderBtn.Edit = EditBtn;
 HeaderBtn.Remove = RemoveBtn;
+HeaderBtn.Save = SaveBtn;
 
 export default HeaderBtn;
