@@ -30,9 +30,6 @@ export default function SizeSelect({
       : setSizes((prev) => [...prev, size]);
   };
 
-  useEffect(() => {
-    setSizes([]);
-  }, [category?.main.id]);
   if (!category?.main) return <></>;
   return (
     <View>

@@ -12,7 +12,7 @@ import SizeSelect from "../components/Edit/SizeSelect";
 import useProductForm from "../hooks/useProductForm";
 import {RegistContainer} from "./styles";
 
-export default function Regist(): JSX.Element {
+export default function Update(): JSX.Element {
   const navigation = useNavigation();
   const {
     images,

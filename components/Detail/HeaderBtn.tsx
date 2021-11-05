@@ -40,10 +40,19 @@ function SaveBtn({onPress}: HeaderBtnProps) {
   );
 }
 
+function EditSaveBtn({onPress}: HeaderBtnProps) {
+  return (
+    <HeaderBtnBox onPress={onPress}>
+      <HeaderBtnText>적용</HeaderBtnText>
+    </HeaderBtnBox>
+  );
+}
+
 function HeaderBtn() {
   return <></>;
 }
 
+HeaderBtn.EditSave = EditSaveBtn;
 HeaderBtn.Edit = EditBtn;
 HeaderBtn.Remove = RemoveBtn;
 HeaderBtn.Save = SaveBtn;

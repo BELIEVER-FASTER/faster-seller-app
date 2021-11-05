@@ -40,7 +40,9 @@ export default function Detail({route, navigation}: DetailData) {
       headerRight: () => (
         <>
           <HeaderBtn.Remove onPress={() => navigation.navigate("DETAIL_EDIT")} />
-          <HeaderBtn.Edit onPress={() => navigation.navigate("DETAIL_EDIT")} />
+          <HeaderBtn.Edit
+            onPress={() => navigation.navigate("DETAIL_EDIT", ProdDetail)}
+          />
         </>
       ),
       title: route.params.name,
