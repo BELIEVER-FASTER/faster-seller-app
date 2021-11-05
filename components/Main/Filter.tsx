@@ -2,13 +2,26 @@ import React, {useEffect, useRef, useState} from "react";
 import {Animated, Pressable, Text, Dimensions} from "react-native";
 import {FilterBtn, FilterContainer, FilterModalItem} from "./styles";
 import {MaterialIcons, MaterialCommunityIcons} from "@expo/vector-icons";
+import {FilterIcon, filterList} from "../../utils/data";
 
 const {height, width} = Dimensions.get("screen");
 type FilterModalProps = {
   open: boolean;
   onClose: () => void;
-  selectedFilter: string;
-  setSelectedFilter: React.Dispatch<React.SetStateAction<string>>;
+  selectedFilter: {
+    id: number;
+    name: string;
+    value: string;
+    icon: string;
+  };
+  setSelectedFilter: React.Dispatch<
+    React.SetStateAction<{
+      id: number;
+      name: string;
+      value: string;
+      icon: string;
+    }>
+  >;
 };
 function FilterModal({
   selectedFilter,
@@ -24,6 +37,10 @@ function FilterModal({
       duration: 400,
       useNativeDriver: true,
     }).start(() => setUp((prev) => !prev));
+  };
+  const selectFilter = (ft: {id: number; name: string; value: string; icon: string}) => {
+    setSelectedFilter(ft);
+    onClose();
   };
   useEffect(() => {
     if (open) {
@@ -65,30 +82,43 @@ function FilterModal({
           zIndex: 99,
         }}
       >
-        <FilterModalItem onPress={onClose}>
-          <MaterialCommunityIcons name="calendar-arrow-left" size={24} color="black" />
-          <Text>최근 등록일순</Text>
-        </FilterModalItem>
-        <FilterModalItem onPress={onClose}>
-          <MaterialCommunityIcons name="sort-numeric-variant" size={24} color="black" />
-          <Text>가격 낮은순</Text>
-        </FilterModalItem>
-        <FilterModalItem onPress={onClose}>
-          <MaterialCommunityIcons
-            name="sort-alphabetical-variant"
-            size={24}
-            color="black"
-          />
-          <Text>이름순</Text>
-        </FilterModalItem>
+        {filterList.map((ft) => (
+          <FilterModalItem
+            selected={selectedFilter.id === ft.id}
+            key={ft.id}
+            onPress={() => selectFilter(ft)}
+          >
+            <MaterialCommunityIcons
+              name={ft.icon as FilterIcon}
+              size={24}
+              color="black"
+            />
+            <Text>{ft.name}</Text>
+          </FilterModalItem>
+        ))}
       </Animated.View>
     </>
   );
 }
 
-export default function Filter(): JSX.Element {
+type FilterProps = {
+  filter: {
+    id: number;
+    name: string;
+    value: string;
+    icon: string;
+  };
+  setFilter: React.Dispatch<
+    React.SetStateAction<{
+      id: number;
+      name: string;
+      value: string;
+      icon: string;
+    }>
+  >;
+};
+export default function Filter({filter, setFilter}: FilterProps): JSX.Element {
   const [open, setopen] = useState(false);
-  const [filter, setFilter] = useState("");
   return (
     <>
       <FilterContainer>
@@ -99,7 +129,7 @@ export default function Filter(): JSX.Element {
             color="#fff"
             style={{transform: [{rotate: open ? "180deg" : "0deg"}]}}
           />
-          <Text style={{color: "#fff"}}>최근 등록일순</Text>
+          <Text style={{color: "#fff"}}>{filter.name}</Text>
         </FilterBtn>
       </FilterContainer>
       {open && (

@@ -59,9 +59,14 @@ export const SwipedItem = styled.TouchableOpacity`
   background-color: #ff0000;
 `;
 
-export const FilterModalItem = styled.TouchableOpacity`
+export const FilterModalItem = styled.TouchableOpacity<{selected: boolean}>`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
   padding: 12px 16px;
+  ${({selected}) =>
+    selected &&
+    `
+    background-color:#eee;
+  `}
 `;

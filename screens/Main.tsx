@@ -14,8 +14,17 @@ import Search from "../components/Main/Search";
 import {prodList} from "../mock/prodList";
 import {Octicons, Ionicons} from "@expo/vector-icons";
 import {SearchNavBtn} from "./styles";
+import MainOB from "../components/OnBoard/Main";
+import {filterList} from "../utils/data";
 
 export default function Main(): JSX.Element {
+  const [obOpen, setObOpen] = useState(true);
+  const [filter, setFilter] = useState<{
+    id: number;
+    name: string;
+    value: string;
+    icon: string;
+  }>(filterList[0]);
   const [searchOpen, setSearchOpen] = useState(false);
   const navigation = useNavigation();
   const onClick = () => {
@@ -53,26 +62,29 @@ export default function Main(): JSX.Element {
     });
   }, [searchOpen]);
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <>
-        <StatusBar translucent backgroundColor="#33205a" barStyle="light-content" />
-        <Filter />
-        <Search open={searchOpen} />
-        <FlatList
-          data={prodList}
-          renderItem={({item}) => <ProdItem item={item} />}
-          keyExtractor={(item) => item.id + ""}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: 1,
-                backgroundColor: "#eee",
-                width: "100%",
-              }}
-            />
-          )}
-        />
-      </>
-    </TouchableWithoutFeedback>
+    <>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <>
+          <StatusBar translucent backgroundColor="#33205a" barStyle="light-content" />
+          <Filter filter={filter} setFilter={setFilter} />
+          <Search open={searchOpen} />
+          <FlatList
+            data={prodList}
+            renderItem={({item}) => <ProdItem item={item} />}
+            keyExtractor={(item) => item.id + ""}
+            ItemSeparatorComponent={() => (
+              <View
+                style={{
+                  height: 1,
+                  backgroundColor: "#eee",
+                  width: "100%",
+                }}
+              />
+            )}
+          />
+        </>
+      </TouchableWithoutFeedback>
+      {obOpen && <MainOB onClose={() => setObOpen(false)} />}
+    </>
   );
 }

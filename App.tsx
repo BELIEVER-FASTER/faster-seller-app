@@ -4,6 +4,7 @@ import {useFonts} from "expo-font";
 import React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import Root from "./navigations/LoggedIn/Root";
+import Root2 from "./navigations/NotLoggedIn/Root";
 import {QueryClient, QueryClientProvider} from "react-query";
 
 const query = new QueryClient();
@@ -22,7 +23,7 @@ export default function App() {
   return (
     <QueryClientProvider client={query}>
       <NavigationContainer>
-        <Root />
+        <Root2 />
       </NavigationContainer>
     </QueryClientProvider>
   );

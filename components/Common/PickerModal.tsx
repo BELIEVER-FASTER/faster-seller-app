@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Picker, Animated, Pressable} from "react-native";
+import {useQuery} from "react-query";
+import {getStoreList} from "../../utils/fetcher";
 
 type PMProps = {
   open: boolean;
@@ -13,6 +15,7 @@ export default function PickerModal({
   setSelectedValue,
   open,
 }: PMProps) {
+  const {data: storeList} = useQuery(["ui", "store"], getStoreList);
   const POSITION = useRef(new Animated.Value(300)).current;
   const [up, setUp] = useState(true);
   const moveUp = () => {
@@ -66,8 +69,9 @@ export default function PickerModal({
           selectedValue={selectedValue}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
         >
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
+          {storeList?.map((store) => (
+            <Picker.Item key={store.id} label={store.name} value={store.id} />
+          ))}
         </Picker>
       </Animated.View>
     </>

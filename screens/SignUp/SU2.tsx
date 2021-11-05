@@ -1,17 +1,24 @@
 import {useNavigation} from "@react-navigation/core";
 import React, {useState} from "react";
 import {
-  Picker,
   Keyboard,
-  Platform,
   Pressable,
   Text,
   TouchableWithoutFeedback,
   View,
+  ScrollView,
 } from "react-native";
+import {useQuery} from "react-query";
 import Button from "../../components/Common/Button";
 import Input from "../../components/Common/Input";
-import PickerModal from "../../components/Common/PickerModal";
+import {
+  CateContainer,
+  CateSelectBox,
+  CateSelectModal,
+  CateSelectText,
+} from "../../components/Edit/styles";
+import {Store} from "../../utils/data";
+import {getStoreList} from "../../utils/fetcher";
 import Hint from "./Hint";
 import {
   SignUpContainer,
@@ -22,9 +29,15 @@ import {
 } from "./styles";
 
 export default function SU2() {
+  const {data: storeList} = useQuery(["ui", "store"], getStoreList);
   const [open, setOpen] = useState(false);
   const onClose = () => setOpen(false);
-  const [selectedValue, setSelectedValue] = useState("");
+  const onOpen = () => setOpen(true);
+  const [store, setStore] = useState<Store | null>(null);
+  const onSelect = (st: Store) => {
+    setStore(st);
+    onClose();
+  };
   const navigation = useNavigation();
   const go2 = () => {
     navigation.navigate("SIGNUP3");
@@ -38,34 +51,48 @@ export default function SU2() {
           <View style={{height: 24}} />
 
           <Text style={{fontSize: 16}}>어떤 상가에 계신가요?</Text>
-          {Platform.OS === "ios" ? (
-            <StoreSelectBox>
-              <Pressable onPress={() => setOpen((prev) => !prev)}>
-                <StoreSelectInput>
-                  <StoreSelectText strong={selectedValue}>
-                    {selectedValue || "선택해주세요"}
-                  </StoreSelectText>
-                </StoreSelectInput>
-              </Pressable>
-            </StoreSelectBox>
-          ) : (
-            <View
-              style={{
-                backgroundColor: "#eee",
-                borderRadius: 6,
-                marginTop: 8,
-                marginBottom: 30,
-              }}
-            >
-              <Picker
-                style={{height: 44}}
-                selectedValue={selectedValue}
-                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+          <StoreSelectBox>
+            <Pressable onPress={onOpen}>
+              <StoreSelectInput>
+                <StoreSelectText strong={store ? store.name : ""}>
+                  {storeList?.find((s) => s.id === store?.id)?.name || "선택해주세요"}
+                </StoreSelectText>
+              </StoreSelectInput>
+            </Pressable>
+          </StoreSelectBox>
+          {open && (
+            <CateSelectModal animationType="slide" transparent>
+              <Pressable
+                style={{
+                  backgroundColor: "#00000020",
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                }}
+                onPress={() => setOpen(false)}
               >
-                <Picker.Item label="Java" value="java" />
-                <Picker.Item label="JavaScript" value="js" />
-              </Picker>
-            </View>
+                <CateContainer
+                  style={{
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 0,
+                      height: 7,
+                    },
+                    shadowOpacity: 0.43,
+                    shadowRadius: 9.51,
+                    elevation: 15,
+                  }}
+                >
+                  <ScrollView>
+                    {storeList?.map((st) => (
+                      <CateSelectBox onPress={() => onSelect(st)} key={st.id}>
+                        <CateSelectText>{st.name}</CateSelectText>
+                      </CateSelectBox>
+                    ))}
+                  </ScrollView>
+                </CateContainer>
+              </Pressable>
+            </CateSelectModal>
           )}
           <Input label="몇층 몇호에 계신가요?" placeholder="예시:10층 / 101호" />
           <View style={{flex: 1}} />
@@ -73,14 +100,6 @@ export default function SU2() {
           <Hint title="회원가입만 해도 혜택이 와르르~~" />
           <Button title="다음" onPress={go2} />
         </SignUpContainer>
-        {open && (
-          <PickerModal
-            onClose={onClose}
-            open={open}
-            selectedValue={selectedValue}
-            setSelectedValue={setSelectedValue}
-          />
-        )}
       </>
     </TouchableWithoutFeedback>
   );

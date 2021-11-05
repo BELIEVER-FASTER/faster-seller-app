@@ -1,7 +1,6 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {Alert, Image, Platform, ScrollView, Text, View} from "react-native";
 import {
-  CateContainer,
   ImageDeleteBtn,
   ImageInputBox,
   ImageInputDesc,
@@ -14,18 +13,23 @@ import {launchImageLibrary, ImageLibraryOptions} from "react-native-image-picker
 import {Ionicons} from "@expo/vector-icons";
 import axios from "axios";
 import {ProductForm} from "../../hooks/useProductForm";
+import {TouchableOpacity} from "react-native-gesture-handler";
+import ImageDescOB from "../OnBoard/ImageDesc";
 
 type ImageInputProps = {
   image: ProductForm["images"];
 };
 export default function ImageInput({image}: ImageInputProps): JSX.Element {
   const {images, setImages} = image;
+  const [openOb, setOpenOb] = useState(false);
+  const [measure, setMeasure] = useState({x: 0, y: 0});
   const [uploading, setUploading] = useState(false);
-
+  const ref = useRef<Image>(null);
   const options: ImageLibraryOptions = {
     mediaType: "photo",
     selectionLimit: 20,
   };
+
   const onRemove = (filename: string) => {
     return Alert.alert("사진제거", "선택한 사진을 제외하시겠습니까?", [
       {
@@ -63,10 +67,30 @@ export default function ImageInput({image}: ImageInputProps): JSX.Element {
       }
     });
   };
+
   return (
     <>
       <View>
-        <ImageInputTitle>상품이미지</ImageInputTitle>
+        <View style={{flexDirection: "row", alignItems: "center"}}>
+          <ImageInputTitle style={{paddingTop: 3, paddingRight: 8}}>
+            상품이미지
+          </ImageInputTitle>
+          <TouchableOpacity onPress={() => setOpenOb(true)}>
+            <Image
+              onLayout={() => ref.current?.measureInWindow((x, y) => setMeasure({x, y}))}
+              ref={ref}
+              style={{width: 20, height: 20}}
+              source={require("../../assets/images/question.png")}
+            />
+          </TouchableOpacity>
+          {openOb && (
+            <ImageDescOB
+              x={measure.x}
+              y={measure.y}
+              onToggle={() => setOpenOb((prev) => !prev)}
+            />
+          )}
+        </View>
         <ImageInputDesc>첫 번째 사진이 대표 이미지로 사용됩니다.</ImageInputDesc>
 
         <ScrollView horizontal>

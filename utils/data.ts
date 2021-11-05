@@ -244,3 +244,13 @@ export const countryList = [
   {id: 2, name: "중국"},
   {id: 3, name: "그외"},
 ];
+
+export type FilterIcon =
+  | "calendar-arrow-left"
+  | "sort-numeric-variant"
+  | "sort-alphabetical-variant";
+export const filterList = [
+  {id: 1, name: "최근 등록일순", value: "created", icon: "calendar-arrow-left"},
+  {id: 2, name: "가격 낮은순", value: "price", icon: "sort-numeric-variant"},
+  {id: 3, name: "이름순", value: "name", icon: "sort-alphabetical-variant"},
+];
