@@ -25,7 +25,7 @@ export default function ProdItem({item}: ProdItemProps): JSX.Element {
         <Image
           style={{height: "100%", width: 70, borderRadius: 6}}
           source={{
-            uri: `https://faster-seller.s3.ap-northeast-2.amazonaws.com/original/product/${item.thumbnail}`,
+            uri: `https://faster-seller.s3.ap-northeast-2.amazonaws.com/resize/300/product/${item.thumbnail}`,
           }}
           resizeMode="cover"
         />

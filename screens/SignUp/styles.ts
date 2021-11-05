@@ -19,7 +19,7 @@ export const StoreSelectInput = styled.View`
 `;
 export const StoreSelectText = styled.Text<{strong: string}>`
   font-size: 15px;
-  padding: 9px;
+  padding: 10px;
   border-radius: 6px;
   color: #aaa;
   ${({strong}) =>

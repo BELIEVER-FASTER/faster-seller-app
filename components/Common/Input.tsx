@@ -6,6 +6,7 @@ import {
   CommonInputWrapper,
   CommonInputText,
   ProdInputText,
+  ProdInputBox,
 } from "./styles";
 import {Text} from "react-native";
 
@@ -33,6 +34,9 @@ type ProdInputProps = {
   onChange?: (e: string) => void;
   value?: string;
   multiline?: boolean;
+  unit?: string;
+  desc?: string;
+  type?: "default" | "numeric";
 };
 
 function ProdInput({
@@ -41,17 +45,25 @@ function ProdInput({
   value,
   onChange,
   multiline = false,
+  desc = "",
+  unit = "",
+  type = "default",
 }: ProdInputProps) {
   return (
     <CommonInputWrapper>
       <Text style={{fontSize: 16, fontWeight: "bold"}}>{label}</Text>
-      <ProdInputText
-        multiline={multiline}
-        onChangeText={onChange}
-        value={value}
-        placeholder={placeholder}
-        placeholderTextColor="#888"
-      />
+      {desc ? <Text style={{fontSize: 14, marginTop: 6}}>{desc}</Text> : <></>}
+      <ProdInputBox>
+        <ProdInputText
+          keyboardType={type}
+          multiline={multiline}
+          onChangeText={onChange}
+          value={value}
+          placeholder={placeholder}
+          placeholderTextColor="#888"
+        />
+        {unit ? <Text style={{fontWeight: "bold"}}>{unit}</Text> : <></>}
+      </ProdInputBox>
     </CommonInputWrapper>
   );
 }

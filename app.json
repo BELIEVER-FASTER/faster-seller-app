@@ -3,9 +3,13 @@
     "name": "seller-app",
     "slug": "seller-app",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "icon": "./assets/images/appstore.png",
+    "splash": {
+      "image": "./assets/images/appstore.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    }
   },
   "name": "seller-app"
 }

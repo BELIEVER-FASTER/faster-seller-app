@@ -1,6 +1,11 @@
-import React from "react";
-import {Text, View} from "react-native";
+import React, {useEffect} from "react";
+import {View} from "react-native";
 import {ProductForm} from "../../hooks/useProductForm";
+import ClothSizeDetail from "./Size/ClothDetail";
+import ClothSize from "./Size/ClothSize";
+import CustomSize from "./Size/CustomSize";
+import ShoesSizeDetail from "./Size/ShoesDetail";
+import ShoesSize from "./Size/ShoesSize";
 import {ImageInputDesc, ImageInputTitle} from "./styles";
 type SizeSelectProps = {
   category?: ProductForm["cate"]["cate"];
@@ -25,6 +30,9 @@ export default function SizeSelect({
       : setSizes((prev) => [...prev, size]);
   };
 
+  useEffect(() => {
+    setSizes([]);
+  }, [category?.main.id]);
   if (!category?.main) return <></>;
   return (
     <View>
@@ -42,20 +50,24 @@ export default function SizeSelect({
           case 8:
             return (
               <>
-                <Text>옷</Text>
+                <ClothSize currentSzs={currentSzs} onClickClothSize={onClickClothSize} />
+                <View style={{height: 30}} />
+                <ClothSizeDetail mainCate={category.main} sizes={sizes} />
               </>
             );
           case 11:
           case 12:
             return (
               <>
-                <Text>신발</Text>
+                <ShoesSize currentSzs={currentSzs} onClickShoesSize={onClickShoesSize} />
+                <View style={{height: 30}} />
+                <ShoesSizeDetail mainCate={category.main} sizes={sizes} />
               </>
             );
           default:
             return (
               <>
-                <Text>기타</Text>
+                <CustomSize sizes={sizes} />
               </>
             );
         }

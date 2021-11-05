@@ -31,7 +31,6 @@ export default function CountrySelect({
     country.onChangeCountry(id + "");
     onClose();
   };
-  console.log(country.country);
   return (
     <View>
       <ImageInputTitle>제조국 표기</ImageInputTitle>
@@ -81,7 +80,12 @@ export default function CountrySelect({
 
       {+country.country === 3 && (
         <>
-          <Input.Prod label="제조국명" placeholder="기타 제조국을 입력해주세요" />
+          <Input.Prod
+            label="제조국명"
+            value={etcCountry.etcCountry}
+            onChange={etcCountry.onChangeEtcCountry}
+            placeholder="기타 제조국을 입력해주세요"
+          />
           <View style={{height: 30}} />
         </>
       )}

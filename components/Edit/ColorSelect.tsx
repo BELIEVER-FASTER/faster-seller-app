@@ -11,7 +11,6 @@ type ColorSelected = {
 };
 export default function ColorSelect({currentColor}: ColorSelected): JSX.Element {
   const {data: colorList} = useQuery(["ui", "color"], getColorList);
-  console.log(colorList);
   const onPress = (color: {id: number; name: string}) => {
     const selected = currentColor.colors.findIndex((v) => v.id === color.id) !== -1;
     if (selected) currentColor.setColors((prev) => prev.filter((v) => v.id !== color.id));
@@ -79,7 +78,7 @@ export default function ColorSelect({currentColor}: ColorSelected): JSX.Element 
         })}
         {colorList && colorList.length % 4 !== 4 ? (
           Array.from({length: 4 - (colorList.length % 4)}).map((_, i) => (
-            <View style={{width: "22%"}}></View>
+            <View key={i + "empty "} style={{width: "22%"}}></View>
           ))
         ) : (
           <></>

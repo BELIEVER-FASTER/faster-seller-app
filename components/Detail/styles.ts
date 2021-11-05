@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 export const HeaderBtnBox = styled.TouchableOpacity<{outlined?: boolean}>`
-  padding: 5px 9px;
+  padding: 6px 10px;
   background-color: #5b23b2;
   border-radius: 6px;
   margin-left: 10px;
@@ -17,7 +17,7 @@ export const HeaderBtnBox = styled.TouchableOpacity<{outlined?: boolean}>`
 export const HeaderBtnText = styled.Text<{outlined?: boolean}>`
   color: #fff;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 13px;
   ${({outlined}) =>
     outlined &&
     `

@@ -19,7 +19,7 @@ export default function Images({images}: ImagesProps) {
       activeDotColor="#5b23b2"
       loop
       autoplay
-      autoplayTimeout={3.5}
+      autoplayTimeout={3}
       containerStyle={{
         width: "100%",
         height: height / 3,
