@@ -10,10 +10,16 @@ import ImageInput from "../components/Edit/ImageInput";
 import PieceSelect from "../components/Edit/PieceSelect";
 import SizeSelect from "../components/Edit/SizeSelect";
 import useProductForm from "../hooks/useProductForm";
+import {useAuth} from "../modules/auth";
+import {useProduct} from "../modules/product";
 import {RegistContainer} from "./styles";
 
 export default function Regist(): JSX.Element {
   const navigation = useNavigation();
+  const {
+    login: {data: userData},
+  } = useAuth();
+  const {addProduct, addProductDispatch, resetRegistDispatch} = useProduct();
   const {
     images,
     name,
@@ -28,6 +34,7 @@ export default function Regist(): JSX.Element {
     etcCountry,
   } = useProductForm();
   const onSubmit = () => {
+    if (!userData) return;
     if (images.images.length === 0) return Alert.alert("이미지를 1개이상 입력해주세요");
     if (!name.name.trim()) return Alert.alert("상품명을 기입해주세요");
     if (!price.price.trim()) return Alert.alert("상품가격을 기입해주세요");
@@ -38,8 +45,8 @@ export default function Regist(): JSX.Element {
     if (!country.country) return Alert.alert("제조국가를 입력해주세요");
     if (country.country === "3" && !etcCountry.etcCountry.trim())
       return Alert.alert("제조국가명을 입력해주세요");
-    console.log({
-      // BrandId: userData.id,
+    addProductDispatch({
+      BrandId: userData.id,
       CategoryMainId: cate.cate?.main.id as number,
       CategoryMiddleId: cate.cate?.middle.id as number,
       images: images.images,
@@ -74,21 +81,19 @@ export default function Regist(): JSX.Element {
     detailInfo,
     etcCountry,
   ]);
-  // console.log({
-  //   // BrandId: userData.id,
-  //   CategoryMainId: cate.cate?.main.id as number,
-  //   CategoryMiddleId: cate.cate?.middle.id as number,
-  //   images: images.images,
-  //   name: name.name,
-  //   price: price.price,
-  //   isPiece: leaf.leaf,
-  //   composition: mixture.mixture,
-  //   country: +country.country,
-  //   countryName: etcCountry.etcCountry,
-  //   sizes: sizes.sizes,
-  //   detail: detailInfo.detailInfo,
-  //   colors: colors.colors,
-  // });
+  useEffect(() => {
+    sizes.setSizes([]);
+  }, [cate.cate]);
+  useEffect(() => {
+    if (addProduct.data) {
+      navigation.navigate("상품목록");
+    }
+  }, [addProduct.data]);
+  useEffect(() => {
+    return () => {
+      resetRegistDispatch();
+    };
+  }, []);
   return (
     <>
       <StatusBar translucent backgroundColor="#fff" barStyle="dark-content" />

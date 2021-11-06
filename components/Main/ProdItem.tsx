@@ -30,7 +30,6 @@ type ProdItemProps = {item: ProdListItem};
 export default function ProdItem({item}: ProdItemProps): JSX.Element {
   const navigation = useNavigation();
   const {toggleActiveDispatch, removeProductDispatch} = useProduct();
-  // console.log(item);
   const toggleValue = () => {
     console.log({isActive: item.isActive === 1 ? 0 : 1});
     toggleActiveDispatch({

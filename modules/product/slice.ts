@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from "@reduxjs/toolkit";
 import {
   addProductAction,
   loadDetailAction,
@@ -10,14 +10,14 @@ import {
   removeProductAction,
   toggleActiveAction,
   updateProductAction,
-} from '.';
+} from ".";
 
 const initialState: ProductState = {
-  loadProductList: { loading: false, data: null, error: null },
-  loadDetail: { loading: false, data: null, error: null },
-  addProduct: { loading: false, data: null, error: null },
-  updateProduct: { loading: false, data: null, error: null },
-  existData: { loading: false, data: null, error: null },
+  loadProductList: {loading: false, data: null, error: null},
+  loadDetail: {loading: false, data: null, error: null},
+  addProduct: {loading: false, data: null, error: null},
+  updateProduct: {loading: false, data: null, error: null},
+  existData: {loading: false, data: null, error: null},
   totalCnt: 0,
   loadMore: false,
   hasMore: true,
@@ -26,7 +26,7 @@ const initialState: ProductState = {
 };
 
 const productSlice = createSlice({
-  name: 'product',
+  name: "product",
   initialState,
   reducers: {
     resetDetail(state) {
@@ -35,49 +35,44 @@ const productSlice = createSlice({
     resetRegist(state) {
       state.addProduct = initialState.addProduct;
     },
-    isMoreLoading(state, { payload }) {
+    isMoreLoading(state, {payload}) {
       state.loadMore = payload;
     },
-    hasMoreData(state, { payload }) {
+    hasMoreData(state, {payload}) {
       state.hasMore = payload;
     },
-    setPage(state, { payload }) {
-      payload === 'next' ? (state.page = state.page + 1) : (state.page = payload);
+    setPage(state, {payload}) {
+      payload === "next" ? (state.page = state.page + 1) : (state.page = payload);
     },
     resetExist(state) {
       state.existData.data = null;
     },
-    setReloadBlock(state, { payload }) {
+    setReloadBlock(state, {payload}) {
       state.reloadBlock = payload;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(loadProductListAction.pending, state => {
+      .addCase(loadProductListAction.pending, (state) => {
         state.loadProductList.data = state.page === 1 ? null : state.loadProductList.data;
         state.loadProductList.loading = true;
         state.loadProductList.error = null;
       })
-      .addCase(loadProductListAction.fulfilled, (state, { payload }) => {
-        // const exist =
-        //   state.loadProductList.data &&
-        //   state.loadProductList.data.findIndex(v => v.id === payload[0]?.id) !== -1;
-
+      .addCase(loadProductListAction.fulfilled, (state, {payload}) => {
         state.loadProductList.loading = false;
-        // if (exist) return;
         (state.loadProductList.data as ProductListItem[]) = state.loadMore
           ? (state.loadProductList.data as ProductListItem[]).concat(payload)
           : payload;
         state.loadProductList.error = null;
       })
-      .addCase(loadProductListAction.rejected, (state, { payload }) => {
+      .addCase(loadProductListAction.rejected, (state, {payload}) => {
         state.loadProductList.loading = true;
         state.loadProductList.data = null;
         state.loadProductList.error = payload;
       })
-      .addCase(toggleActiveAction.fulfilled, (state, { payload }) => {
+      .addCase(toggleActiveAction.fulfilled, (state, {payload}) => {
         const idx = state.loadProductList.data?.findIndex(
-          v => v.id === +payload
+          (v) => v.id === +payload
         ) as number;
         if (idx === -1) return;
 
@@ -88,48 +83,61 @@ const productSlice = createSlice({
           state: 2,
         };
       })
-      .addCase(loadDetailAction.pending, state => {
+      .addCase(loadDetailAction.pending, (state) => {
         state.loadDetail.loading = true;
         state.loadDetail.data = null;
         state.loadDetail.error = null;
       })
-      .addCase(loadDetailAction.fulfilled, (state, { payload }) => {
+      .addCase(loadDetailAction.fulfilled, (state, {payload}) => {
         state.loadDetail.loading = false;
         state.loadDetail.data = payload;
         state.loadDetail.error = null;
       })
-      .addCase(loadDetailAction.rejected, (state, { payload }) => {
+      .addCase(loadDetailAction.rejected, (state, {payload}) => {
         state.loadDetail.loading = true;
         state.loadDetail.data = null;
         state.loadDetail.error = payload;
       })
-      .addCase(addProductAction.pending, state => {
+      .addCase(addProductAction.pending, (state) => {
         state.addProduct.loading = true;
         state.addProduct.data = null;
         state.addProduct.error = null;
       })
-      .addCase(addProductAction.fulfilled, (state, { payload }) => {
+      .addCase(addProductAction.fulfilled, (state, {payload}) => {
+        state.loadProductList.data = [
+          {
+            id: payload.id,
+            thumbnail: payload.thumbnail,
+            name: payload.name,
+            price: payload.price,
+            createdAt: payload.createdAt,
+            isActive: 1,
+            state: 1,
+            UpdatedProduct: null,
+          },
+          ...(state.loadProductList.data as ProductListItem[]),
+        ];
         state.addProduct.loading = false;
         state.addProduct.data = payload;
         state.addProduct.error = null;
       })
-      .addCase(addProductAction.rejected, (state, { payload }) => {
+      .addCase(addProductAction.rejected, (state, {payload}) => {
         state.addProduct.loading = true;
         state.addProduct.data = null;
         state.addProduct.error = payload;
       })
-      .addCase(updateProductAction.pending, state => {
+      .addCase(updateProductAction.pending, (state) => {
         state.updateProduct.loading = true;
         state.updateProduct.data = null;
         state.updateProduct.error = null;
       })
-      .addCase(updateProductAction.fulfilled, (state, { payload }) => {
+      .addCase(updateProductAction.fulfilled, (state, {payload}) => {
         state.updateProduct.loading = false;
         state.updateProduct.data = payload;
         state.updateProduct.error = null;
 
         const idx = state.loadProductList.data?.findIndex(
-          v => v.id === (payload.ProductId as number)
+          (v) => v.id === (payload.ProductId as number)
         ) as number;
         if (idx === -1) return;
 
@@ -143,25 +151,25 @@ const productSlice = createSlice({
           },
         };
       })
-      .addCase(updateProductAction.rejected, (state, { payload }) => {
+      .addCase(updateProductAction.rejected, (state, {payload}) => {
         state.updateProduct.loading = true;
         state.updateProduct.data = null;
         state.updateProduct.error = payload;
       })
-      .addCase(removeProductAction.fulfilled, (state, { payload }) => {
+      .addCase(removeProductAction.fulfilled, (state, {payload}) => {
         state.totalCnt = state.totalCnt - 1;
         const idx = state.loadProductList.data?.findIndex(
-          v => v.id === +payload
+          (v) => v.id === +payload
         ) as number;
         if (idx === -1) return;
         (state.loadProductList.data as ProductListItem[]) = (
           state.loadProductList.data as ProductListItem[]
-        ).filter(prod => prod.id !== +payload);
+        ).filter((prod) => prod.id !== +payload);
       })
-      .addCase(loadProductCntAction.fulfilled, (state, { payload }) => {
+      .addCase(loadProductCntAction.fulfilled, (state, {payload}) => {
         state.totalCnt = payload;
       })
-      .addCase(loadExistAction.fulfilled, (state, { payload }) => {
+      .addCase(loadExistAction.fulfilled, (state, {payload}) => {
         state.existData.data = payload;
       });
   },

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import {useCallback} from "react";
 import {
   addProductAction,
   loadDetailAction,
@@ -9,9 +9,9 @@ import {
   removeProductAction,
   toggleActiveAction,
   updateProductAction,
-} from '.';
-import { useAppDispatch, useAppSelector } from '..';
-import { resetExist, setPage, setReloadBlock } from './slice';
+} from ".";
+import {useAppDispatch, useAppSelector} from "..";
+import {resetExist, resetRegist, setPage, setReloadBlock} from "./slice";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useProduct() {
@@ -25,22 +25,22 @@ export function useProduct() {
     loadMore,
     totalCnt,
     existData,
-  } = useAppSelector(state => state.product);
+  } = useAppSelector((state) => state.product);
 
   const dispatch = useAppDispatch();
 
   const loadProductListDispatch = useCallback(
-    (data: ProductPayload['loadProductList']) => {
+    (data: ProductPayload["loadProductList"]) => {
       dispatch(loadProductListAction(data));
     },
     []
   );
 
-  const toggleActiveDispatch = useCallback((data: ProductPayload['toggleActive']) => {
+  const toggleActiveDispatch = useCallback((data: ProductPayload["toggleActive"]) => {
     dispatch(toggleActiveAction(data));
   }, []);
 
-  const loadDetailDispatch = useCallback((data: ProductPayload['loadDetail']) => {
+  const loadDetailDispatch = useCallback((data: ProductPayload["loadDetail"]) => {
     dispatch(loadDetailAction(data));
   }, []);
 
@@ -52,23 +52,23 @@ export function useProduct() {
     dispatch(resetExist());
   }, []);
 
-  const addProductDispatch = useCallback((data: ProductPayload['addProduct']) => {
+  const addProductDispatch = useCallback((data: ProductPayload["addProduct"]) => {
     dispatch(addProductAction(data));
   }, []);
 
-  const updateProductDispatch = useCallback((data: ProductPayload['updateProduct']) => {
+  const updateProductDispatch = useCallback((data: ProductPayload["updateProduct"]) => {
     dispatch(updateProductAction(data));
   }, []);
 
-  const removeProductDispatch = useCallback((data: ProductPayload['removeProduct']) => {
+  const removeProductDispatch = useCallback((data: ProductPayload["removeProduct"]) => {
     dispatch(removeProductAction(data));
   }, []);
 
-  const loadProductCntDispatch = useCallback((data: ProductPayload['loadProductCnt']) => {
+  const loadProductCntDispatch = useCallback((data: ProductPayload["loadProductCnt"]) => {
     dispatch(loadProductCntAction(data));
   }, []);
 
-  const setPageDispatch = useCallback((data: number | 'next') => {
+  const setPageDispatch = useCallback((data: number | "next") => {
     dispatch(setPage(data));
   }, []);
 
@@ -76,8 +76,12 @@ export function useProduct() {
     dispatch(setReloadBlock(data));
   }, []);
 
+  const resetRegistDispatch = useCallback(() => {
+    dispatch(resetRegist());
+  }, []);
   return {
     page,
+    resetRegistDispatch,
     existData,
     reloadBlock,
     totalCnt,

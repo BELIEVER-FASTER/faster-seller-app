@@ -48,6 +48,7 @@ export default function Detail({route, navigation}: DetailData) {
       title: route.params.name,
     });
   }, []);
+  console.log(route.params);
 
   return (
     <>
