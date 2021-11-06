@@ -16,6 +16,7 @@ import {Octicons, Ionicons} from "@expo/vector-icons";
 import {SearchNavBtn} from "./styles";
 import MainOB from "../components/OnBoard/Main";
 import {filterList} from "../utils/data";
+import {useAuth} from "../modules/auth";
 
 export default function Main(): JSX.Element {
   const [obOpen, setObOpen] = useState(true);
@@ -27,11 +28,15 @@ export default function Main(): JSX.Element {
   }>(filterList[0]);
   const [searchOpen, setSearchOpen] = useState(false);
   const navigation = useNavigation();
+  const {logoutDispatch, login} = useAuth();
   const onClick = () => {
     return Alert.alert("로그아웃", "정말 로그아웃 하시겠습니까?", [
       {
         text: "네",
-        onPress: () => Alert.alert("성공", "로그아웃되었슴"),
+        onPress: () => {
+          if (!login.data) return;
+          logoutDispatch({email: login.data.email, name: login.data.name});
+        },
       },
       {
         text: "취소",
@@ -40,7 +45,7 @@ export default function Main(): JSX.Element {
   };
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: "누구누구님의 상품목록",
+      headerTitle: `${login.data?.name} 님의 상품목록`,
       headerRight: () => (
         <SearchNavBtn>
           <Octicons

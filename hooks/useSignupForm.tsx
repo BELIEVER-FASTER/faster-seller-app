@@ -2,18 +2,18 @@
 import {useState, useCallback, useEffect} from "react";
 import _debounce from "lodash/debounce";
 import {useInput} from "./useInput";
-// import {useAuth} from "../modules/auth/hook";
+import {useAuth} from "../modules/auth";
 
 export type SignupForm = ReturnType<typeof useSignupForm>;
 
 export const useSignupForm = () => {
-  //   const {emailCheck, emailCheckDispatch} = useAuth();
+  const {emailCheck, emailCheckDispatch} = useAuth();
   //NOTE:이메일
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const debounce = useCallback(
     _debounce((emailV: string) => {
-      //   emailCheckDispatch(emailV);
+      emailCheckDispatch(emailV);
     }, 400),
     []
   );
@@ -27,12 +27,12 @@ export const useSignupForm = () => {
     },
     [email]
   );
-  //   useEffect(() => {
-  //     if (emailCheck === "exist") return setEmailError("이미 사용중인 이메일입니다.");
-  //     return () => {
-  //       emailCheckDispatch("");
-  //     };
-  //   }, [emailCheck]);
+  useEffect(() => {
+    if (emailCheck === "exist") return setEmailError("이미 사용중인 이메일입니다.");
+    return () => {
+      emailCheckDispatch("");
+    };
+  }, [emailCheck]);
 
   //NOTE:비밀번호
   const [pwd, onChangePwd, , pwdError] = useInput("", {

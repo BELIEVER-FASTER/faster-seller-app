@@ -2,10 +2,12 @@ import AppLoading from "expo-app-loading";
 import {useAssets} from "expo-asset";
 import {useFonts} from "expo-font";
 import React from "react";
-import {NavigationContainer} from "@react-navigation/native";
-import Root from "./navigations/LoggedIn/Root";
-import Root2 from "./navigations/NotLoggedIn/Root";
 import {QueryClient, QueryClientProvider} from "react-query";
+import SignUpFormProvider from "./hooks/SignUpFormProvider";
+import {Provider} from "react-redux";
+import store from "./modules";
+import RootApp from "./Root";
+import Toast from "./components/Common/Toast";
 
 const query = new QueryClient();
 
@@ -21,10 +23,12 @@ export default function App() {
 
   if (!loaded || !assets) return <AppLoading />;
   return (
-    <QueryClientProvider client={query}>
-      <NavigationContainer>
-        <Root2 />
-      </NavigationContainer>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <SignUpFormProvider>
+        <QueryClientProvider client={query}>
+          <RootApp />
+        </QueryClientProvider>
+      </SignUpFormProvider>
+    </Provider>
   );
 }

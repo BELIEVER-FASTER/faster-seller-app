@@ -3,11 +3,20 @@ import React from "react";
 import {Keyboard, Text, TouchableWithoutFeedback, View} from "react-native";
 import Button from "../../components/Common/Button";
 import Input from "../../components/Common/Input";
+import {useSF} from "../../hooks/SignUpFormProvider";
+import {useAuth} from "../../modules/auth";
 import {DoubleBtnWrapper, MultiLineText, SignUpContainer} from "./styles";
 
 export default function SU6() {
   const navigation = useNavigation();
+  const {
+    addRecommDispatch,
+    signup: {data: signUpData},
+  } = useAuth();
+  const {recommender} = useSF();
   const go2 = () => {
+    if (!signUpData) return;
+    addRecommDispatch({userId: signUpData.id, brand: recommender.recommender});
     navigation.navigate("SIGNUP7");
   };
   return (
@@ -19,6 +28,8 @@ export default function SU6() {
           ))}
         </View>
         <Input
+          value={recommender.recommender}
+          onChange={recommender.onChangeRecommender}
           label="추천한 브랜드와 상가 이름을 적어주세요!"
           placeholder="예시:룰루레몬 / 킹스스퀘어"
         />
@@ -43,7 +54,12 @@ export default function SU6() {
         <View style={{flex: 1}} />
         <DoubleBtnWrapper>
           <Button title="추천 없음" outlined onPress={go2} width="45%" />
-          <Button title="추천 있음" onPress={go2} width="45%" />
+          <Button
+            title="추천 있음"
+            onPress={go2}
+            width="45%"
+            disabled={!recommender.recommender.trim()}
+          />
         </DoubleBtnWrapper>
       </SignUpContainer>
     </TouchableWithoutFeedback>

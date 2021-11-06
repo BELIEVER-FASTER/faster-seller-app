@@ -8,18 +8,23 @@ import {
   ProdInputText,
   ProdInputBox,
 } from "./styles";
-import {Text} from "react-native";
+import {KeyboardTypeOptions, Text} from "react-native";
 
 type LoginInputProps = {
   label?: string;
   placeholder?: string;
   type: "email" | "pwd";
+  value: string;
+  onChange: (e: string) => void;
 };
-const LoginInput = ({placeholder, type}: LoginInputProps) => {
+const LoginInput = ({placeholder, type, value, onChange}: LoginInputProps) => {
   return (
     <LoginInputContainer>
       <FontAwesome5 name={type === "email" ? "user" : "unlock"} size={20} color="#fff" />
       <LoginInputBox
+        autoCapitalize="none"
+        keyboardType={type === "email" ? "email-address" : "default"}
+        onChangeText={onChange}
         placeholderTextColor="#aaa"
         placeholder={placeholder}
         secureTextEntry={type === "pwd"}
@@ -55,6 +60,7 @@ function ProdInput({
       {desc ? <Text style={{fontSize: 14, marginTop: 6}}>{desc}</Text> : <></>}
       <ProdInputBox>
         <ProdInputText
+          autoCapitalize="none"
           keyboardType={type}
           multiline={multiline}
           onChangeText={onChange}
@@ -71,12 +77,31 @@ function ProdInput({
 type InputProps = {
   label?: string;
   placeholder?: string;
+  value?: string;
+  onChange?: (e: string) => void;
+  type?: KeyboardTypeOptions;
+  secure?: boolean;
 };
-function Input({label, placeholder}: InputProps) {
+function Input({
+  label,
+  placeholder,
+  value,
+  onChange,
+  type = "default",
+  secure,
+}: InputProps) {
   return (
     <CommonInputWrapper>
       <Text style={{fontSize: 16}}>{label}</Text>
-      <CommonInputText placeholder={placeholder} placeholderTextColor="#888" />
+      <CommonInputText
+        autoCapitalize="none"
+        secureTextEntry={secure}
+        keyboardType={type}
+        placeholder={placeholder}
+        value={value}
+        onChangeText={onChange}
+        placeholderTextColor="#888"
+      />
     </CommonInputWrapper>
   );
 }

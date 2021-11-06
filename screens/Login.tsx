@@ -1,6 +1,6 @@
 import {useNavigation} from "@react-navigation/core";
 import {StatusBar} from "expo-status-bar";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   Image,
   ImageBackground,
@@ -13,14 +13,26 @@ import {SafeAreaView} from "react-native-safe-area-context";
 import Button from "../components/Common/Button";
 import Input from "../components/Common/Input";
 import LoginOB from "../components/OnBoard/Login";
+import useInput from "../hooks/useInput";
+import {useAuth} from "../modules/auth";
 import {Divider, LoginBtnWrapper, LoginText} from "./styles";
 
 export default function Login() {
+  const [email, onChangeEmail] = useInput();
+  const [password, onChangePassword] = useInput();
+  const {loginDispatch, resetSignUpDispatch} = useAuth();
   const [obOpen, setObOpen] = useState(true);
   const navigation = useNavigation();
   const go2 = () => {
     navigation.navigate("SIGNUP1");
   };
+
+  const onLogin = () => {
+    loginDispatch({email, password});
+  };
+  useEffect(() => {
+    resetSignUpDispatch();
+  }, []);
   return (
     <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -39,11 +51,21 @@ export default function Login() {
               />
               <Divider />
               <LoginText>No.1 글로벌 B2B 패션 플랫폼</LoginText>
-              <Input.Login placeholder="아이디를 입력해주세요" type="email" />
+              <Input.Login
+                value={email}
+                onChange={onChangeEmail}
+                placeholder="아이디를 입력해주세요"
+                type="email"
+              />
               <View style={{height: 5}} />
-              <Input.Login placeholder="비밀번호를 입력해주세요" type="pwd" />
+              <Input.Login
+                value={password}
+                onChange={onChangePassword}
+                placeholder="비밀번호를 입력해주세요"
+                type="pwd"
+              />
               <View style={{height: 50}} />
-              <Button title="로그인" outlined textColor="#fff" />
+              <Button title="로그인" outlined textColor="#fff" onPress={onLogin} />
               <LoginBtnWrapper>
                 <Button.Login title="회원가입" onPress={go2} />
                 <View style={{width: 4, backgroundColor: "#fff", height: "100%"}} />

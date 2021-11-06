@@ -114,3 +114,19 @@ export const ProdInputText = styled.TextInput<{multiline: boolean}>`
     min-height:100px;
   `}
 `;
+
+export const ToastPopUpBox = styled.View<{visible: boolean}>`
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+`;
+export const ToastPopUpContent = styled.View`
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 8px 12px;
+  border-radius: 100px;
+`;

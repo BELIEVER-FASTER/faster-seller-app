@@ -8,7 +8,16 @@ import SU4 from "../../screens/SignUp/SU4";
 import SU5 from "../../screens/SignUp/SU5";
 import SU6 from "../../screens/SignUp/SU6";
 import SU7 from "../../screens/SignUp/SU7";
-
+export type NotLoggedInStackParamList = {
+  LOGIN: {};
+  SIGNUP1: {};
+  SIGNUP2: {};
+  SIGNUP3: {};
+  SIGNUP4: {};
+  SIGNUP5: {};
+  SIGNUP6: {};
+  SIGNUP7: {};
+};
 const Nav = createNativeStackNavigator();
 export const Root = () => {
   return (

@@ -2,7 +2,6 @@ import {useNavigation} from "@react-navigation/core";
 import React from "react";
 import {Keyboard, Text, TouchableWithoutFeedback, View} from "react-native";
 import Button from "../../components/Common/Button";
-import Input from "../../components/Common/Input";
 import {DoubleBtnWrapper, MultiLineText, SignUpContainer} from "./styles";
 
 export default function SU7() {
