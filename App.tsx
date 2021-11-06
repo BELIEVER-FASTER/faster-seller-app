@@ -3,11 +3,9 @@ import {useAssets} from "expo-asset";
 import {useFonts} from "expo-font";
 import React from "react";
 import {QueryClient, QueryClientProvider} from "react-query";
-import SignUpFormProvider from "./hooks/SignUpFormProvider";
 import {Provider} from "react-redux";
 import store from "./modules";
 import RootApp from "./Root";
-import Toast from "./components/Common/Toast";
 
 const query = new QueryClient();
 
@@ -24,11 +22,9 @@ export default function App() {
   if (!loaded || !assets) return <AppLoading />;
   return (
     <Provider store={store}>
-      <SignUpFormProvider>
-        <QueryClientProvider client={query}>
-          <RootApp />
-        </QueryClientProvider>
-      </SignUpFormProvider>
+      <QueryClientProvider client={query}>
+        <RootApp />
+      </QueryClientProvider>
     </Provider>
   );
 }

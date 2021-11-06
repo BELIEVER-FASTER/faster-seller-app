@@ -4,9 +4,11 @@ export const FilterContainer = styled.View`
   background: #33205a;
   height: 30px;
   width: 100%;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 16px;
   z-index: 10;
+  flex-direction: row;
 `;
 export const FilterBtn = styled.Pressable`
   flex-direction: row;
@@ -46,10 +48,29 @@ export const ProdItemContainer = styled.Pressable`
 export const PISummary = styled.View`
   padding: 0 12px;
   flex: 1;
+  overflow: hidden;
+`;
+export const TitleBox = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 export const PITitle = styled.Text`
   font-size: 14px;
   font-weight: bold;
+  flex: 1;
+`;
+export const RemovedTitle = styled.Text`
+  font-size: 12px;
+  text-decoration: line-through;
+`;
+export const PIPrice = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+`;
+export const RemovedPrice = styled.Text`
+  font-size: 10px;
+  text-decoration: line-through;
+  padding-left: 5px;
 `;
 export const SwipedItem = styled.TouchableOpacity`
   width: 80px;
@@ -69,4 +90,26 @@ export const FilterModalItem = styled.TouchableOpacity<{selected: boolean}>`
     `
     background-color:#eee;
   `}
+`;
+
+export const BadgeBox = styled.View<{state: number}>`
+  align-items: center;
+  justify-content: center;
+  padding: 2px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+  ${({state}) => {
+    return state === 1
+      ? `
+          background-color: #7855af;
+        `
+      : `
+          background-color: #ad1457;
+        `;
+  }}
+`;
+
+export const BadgeText = styled.Text`
+  font-size: 12px;
+  color: #fff;
 `;

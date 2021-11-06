@@ -116,12 +116,14 @@ type FilterProps = {
       icon: string;
     }>
   >;
+  totalCnt: number;
 };
-export default function Filter({filter, setFilter}: FilterProps): JSX.Element {
+export default function Filter({filter, setFilter, totalCnt}: FilterProps): JSX.Element {
   const [open, setopen] = useState(false);
   return (
     <>
       <FilterContainer>
+        <Text style={{color: "#fff", fontSize: 12}}>총 {totalCnt}개의 결과</Text>
         <FilterBtn onPress={() => setopen((prev) => !prev)}>
           <MaterialIcons
             name="arrow-drop-down"

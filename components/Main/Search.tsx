@@ -1,15 +1,31 @@
-import React, {useEffect, useRef, useState} from "react";
-import {Animated, Text} from "react-native";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {Animated, Text, TouchableOpacity} from "react-native";
 import {SearchBox, SearchContainer, SearchInput} from "./styles";
 import {Octicons} from "@expo/vector-icons";
-
+import _debounce from "lodash/debounce";
 type SearchProps = {
   open: boolean;
+  setKeyword: React.Dispatch<React.SetStateAction<string>>;
 };
 const A_SearchCT = Animated.createAnimatedComponent(SearchContainer);
-export default function Search({open}: SearchProps): JSX.Element {
+export default function Search({open, setKeyword}: SearchProps): JSX.Element {
+  const [currentKey, setCurrentKey] = useState("");
   const POSITION = useRef(new Animated.Value(-50)).current;
   const [height, setHeight] = useState(0);
+  const debounce = useCallback(
+    _debounce((emailV: string) => {
+      setKeyword(emailV);
+    }, 500),
+    []
+  );
+  const onChangeKeyword = (text: string) => {
+    setCurrentKey(text);
+    debounce(text);
+  };
+  const onReset = () => {
+    setCurrentKey("");
+    setKeyword("");
+  };
   const moveUp = () => {
     open && setHeight(50);
     Animated.timing(POSITION, {
@@ -34,9 +50,11 @@ export default function Search({open}: SearchProps): JSX.Element {
     >
       <SearchBox>
         <Octicons name="search" size={20} color="#33205a" />
-        <SearchInput />
+        <SearchInput value={currentKey} onChangeText={onChangeKeyword} />
       </SearchBox>
-      <Text>리셋</Text>
+      <TouchableOpacity onPress={onReset}>
+        <Text>리셋</Text>
+      </TouchableOpacity>
     </A_SearchCT>
   ) : (
     <></>

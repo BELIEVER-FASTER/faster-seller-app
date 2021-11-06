@@ -249,8 +249,31 @@ export type FilterIcon =
   | "calendar-arrow-left"
   | "sort-numeric-variant"
   | "sort-alphabetical-variant";
-export const filterList = [
+export const filterList: FilterType[] = [
   {id: 1, name: "최근 등록일순", value: "created", icon: "calendar-arrow-left"},
   {id: 2, name: "가격 낮은순", value: "price", icon: "sort-numeric-variant"},
   {id: 3, name: "이름순", value: "name", icon: "sort-alphabetical-variant"},
 ];
+export type FilterType = {
+  id: number;
+  name: string;
+  value: string;
+  icon: string;
+};
+
+export type ProdListItem = {
+  UpdatedProduct: UpdatedProduct | null;
+  createdAt: Date;
+  id: number;
+  isActive: number;
+  name: string;
+  price: number;
+  state: number;
+  thumbnail: string;
+};
+
+type UpdatedProduct = {
+  name: string;
+  price: number;
+  thumbnail: string;
+};

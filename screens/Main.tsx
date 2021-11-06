@@ -1,32 +1,22 @@
 import {useNavigation} from "@react-navigation/core";
 import React, {useEffect, useState} from "react";
-import {
-  Keyboard,
-  StatusBar,
-  TouchableWithoutFeedback,
-  FlatList,
-  View,
-  Alert,
-} from "react-native";
+import {Keyboard, StatusBar, TouchableWithoutFeedback, Alert} from "react-native";
 import Filter from "../components/Main/Filter";
-import ProdItem from "../components/Main/ProdItem";
 import Search from "../components/Main/Search";
-import {prodList} from "../mock/prodList";
 import {Octicons, Ionicons} from "@expo/vector-icons";
 import {SearchNavBtn} from "./styles";
 import MainOB from "../components/OnBoard/Main";
-import {filterList} from "../utils/data";
+import {FilterType, filterList} from "../utils/data";
 import {useAuth} from "../modules/auth";
+import {useProduct} from "../modules/product";
+import ProdList from "../components/Main/ProdList";
 
 export default function Main(): JSX.Element {
   const [obOpen, setObOpen] = useState(true);
-  const [filter, setFilter] = useState<{
-    id: number;
-    name: string;
-    value: string;
-    icon: string;
-  }>(filterList[0]);
+  const [filter, setFilter] = useState<FilterType>(filterList[0]);
+  const [keyword, setKeyword] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+  const {totalCnt, loadProductCntDispatch} = useProduct();
   const navigation = useNavigation();
   const {logoutDispatch, login} = useAuth();
   const onClick = () => {
@@ -43,6 +33,7 @@ export default function Main(): JSX.Element {
       },
     ]);
   };
+
   useEffect(() => {
     navigation.setOptions({
       headerTitle: `${login.data?.name} 님의 상품목록`,
@@ -66,27 +57,21 @@ export default function Main(): JSX.Element {
       ),
     });
   }, [searchOpen]);
+
+  useEffect(() => {
+    loadProductCntDispatch({
+      keyword: keyword ? keyword : "",
+    });
+  }, [keyword]);
+
   return (
     <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <>
           <StatusBar translucent backgroundColor="#33205a" barStyle="light-content" />
-          <Filter filter={filter} setFilter={setFilter} />
-          <Search open={searchOpen} />
-          <FlatList
-            data={prodList}
-            renderItem={({item}) => <ProdItem item={item} />}
-            keyExtractor={(item) => item.id + ""}
-            ItemSeparatorComponent={() => (
-              <View
-                style={{
-                  height: 1,
-                  backgroundColor: "#eee",
-                  width: "100%",
-                }}
-              />
-            )}
-          />
+          <Filter totalCnt={totalCnt} filter={filter} setFilter={setFilter} />
+          <Search setKeyword={setKeyword} open={searchOpen} />
+          <ProdList keyword={keyword} sort={filter} />
         </>
       </TouchableWithoutFeedback>
       {obOpen && <MainOB onClose={() => setObOpen(false)} />}
