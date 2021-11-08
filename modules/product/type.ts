@@ -143,11 +143,11 @@ export interface ProductColor {
 export interface Color {
   id: number;
   name: string;
-  hex: string;
+  hex?: string;
 }
 
 export interface PImage {
-  id: number;
+  id?: number;
   src: string;
   filename: string;
 }
@@ -163,4 +163,28 @@ export interface ProductSize {
   thigh?: string;
   hem?: string;
   SizeOpt: CategoryMain;
+}
+
+export interface ProdDetail {
+  Brand: Brand;
+  CategoryMain: CategoryMain;
+  CategoryMiddle: CategoryMain;
+  Country: CategoryMain;
+  CountryId: number;
+  ProductColors: ProductColor[];
+  ProductSizes: ProductSize[];
+  approavedAt: Date | null;
+  composition: string;
+  countryName: string;
+  createdAt: Date;
+  detail: string;
+  id: number;
+  isActive: number;
+  isPiece: number;
+  name: string;
+  pImages: PImage[];
+  price: number;
+  state?: number;
+  thumbnail: string;
+  ProductId?: number;
 }

@@ -16,10 +16,6 @@ export default function Switch({value, toggleValue}: SwitchProps) {
       useNativeDriver: true,
     }).start();
   };
-  // const textPosition = POSITION.interpolate({
-  //   inputRange: [2, 41],
-  //   outputRange: [31, 3],
-  // });
   useEffect(() => {
     slide();
   }, [value]);
@@ -29,7 +25,7 @@ export default function Switch({value, toggleValue}: SwitchProps) {
       style={{backgroundColor: value ? "#5B23B2" : "#aaa"}}
     >
       <Animated.Text
-        style={{fontSize: 11, color: "#fff", transform: [{translateX: value ? 5 : 31}]}}
+        style={{fontSize: 12, color: "#fff", transform: [{translateX: value ? 6 : 30}]}}
       >
         {value ? "판매중" : "품절"}
       </Animated.Text>

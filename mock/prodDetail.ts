@@ -107,4 +107,3 @@ export const ProdDetail = {
     },
   ],
 };
-export type ProdDetail = typeof ProdDetail;

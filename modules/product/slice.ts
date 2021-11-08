@@ -5,6 +5,7 @@ import {
   loadExistAction,
   loadProductCntAction,
   loadProductListAction,
+  ProductDetail,
   ProductListItem,
   ProductState,
   removeProductAction,
@@ -135,6 +136,9 @@ const productSlice = createSlice({
         state.updateProduct.loading = false;
         state.updateProduct.data = payload;
         state.updateProduct.error = null;
+        // (state.loadDetail.data as ProductDetail) = {
+        //   ...(state.loadDetail.data as ProductDetail),
+        // };
 
         const idx = state.loadProductList.data?.findIndex(
           (v) => v.id === (payload.ProductId as number)

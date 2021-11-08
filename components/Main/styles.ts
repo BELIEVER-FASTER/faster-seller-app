@@ -113,3 +113,49 @@ export const BadgeText = styled.Text`
   font-size: 12px;
   color: #fff;
 `;
+
+export const SkelletonBox = styled.View`
+  flex-direction: row;
+  padding: 10px 16px;
+  height: 90px;
+  align-items: center;
+  width: 100%;
+`;
+export const SKSwitch = styled.View`
+  background-color: #eee;
+  width: 60px;
+  height: 28px;
+  border-radius: 30px;
+`;
+export const SKImage = styled.View`
+  background-color: #eee;
+  height: 100%;
+  width: 70px;
+  border-radius: 6px;
+`;
+export const SKTitle = styled.View`
+  background-color: #eee;
+  height: 18px;
+  width: 60%;
+`;
+export const SKPrice = styled.View`
+  background-color: #eee;
+  height: 14px;
+  width: 30%;
+`;
+export const SKDate = styled.View`
+  margin: 9px 0;
+  height: 9px;
+  width: 40%;
+  background-color: #eee;
+`;
+
+export const ProdListEndBox = styled.View`
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+`;
+export const ProdListEndText = styled.Text`
+  font-size: 17px;
+`;

@@ -130,9 +130,7 @@ export default function ImageInput({image}: ImageInputProps): JSX.Element {
             <ImgLoadingBox>
               <Image
                 style={{width: "80%", height: 200}}
-                source={{
-                  uri: "https://i.ibb.co/xjC3nYr/1c13f3fe7a6bba370007aea254e195e3.gif",
-                }}
+                source={require("../../assets/images/loading.gif")}
               />
               <View>
                 <Text style={{fontSize: 16, marginBottom: 10}}>

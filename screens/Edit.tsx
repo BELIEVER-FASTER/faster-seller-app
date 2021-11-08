@@ -11,6 +11,8 @@ import ImageInput from "../components/Edit/ImageInput";
 import PieceSelect from "../components/Edit/PieceSelect";
 import SizeSelect from "../components/Edit/SizeSelect";
 import useProductForm from "../hooks/useProductForm";
+import {useAuth} from "../modules/auth";
+import {useProduct} from "../modules/product";
 import {DetailStackParamList} from "../navigations/LoggedIn/DetailStack";
 import {RegistContainer} from "./styles";
 
@@ -31,7 +33,12 @@ export default function Edit({route}: DetailData): JSX.Element {
     detailInfo,
     etcCountry,
   } = useProductForm();
-  const onSubmit = () => {
+  const {updateProductDispatch, loadDetailDispatch} = useProduct();
+  const {
+    login: {data: userData},
+  } = useAuth();
+  const onSubmit = async () => {
+    if (!userData) return;
     if (images.images.length === 0) return Alert.alert("이미지를 1개이상 입력해주세요");
     if (!name.name.trim()) return Alert.alert("상품명을 기입해주세요");
     if (!price.price.trim()) return Alert.alert("상품가격을 기입해주세요");
@@ -42,7 +49,37 @@ export default function Edit({route}: DetailData): JSX.Element {
     if (!country.country) return Alert.alert("제조국가를 입력해주세요");
     if (country.country === "3" && !etcCountry.etcCountry.trim())
       return Alert.alert("제조국가명을 입력해주세요");
+
+    await updateProductDispatch({
+      BrandId: userData.id,
+      CategoryMainId: cate.cate?.main.id as number,
+      CategoryMiddleId: cate.cate?.middle.id as number,
+      images: images.images,
+      name: name.name,
+      price: price.price,
+      isPiece: leaf.leaf,
+      composition: mixture.mixture,
+      country: +country.country,
+      countryName: etcCountry.etcCountry,
+      sizes: sizes.sizes,
+      detail: detailInfo.detailInfo,
+      colors: colors.colors,
+      ProductId: route.params.ProductId ? route.params.ProductId : route.params.id,
+    });
+    loadDetailDispatch({
+      type: "updated",
+      productId: route.params.ProductId ? +route.params.ProductId : +route.params.id,
+    });
+    navigation.navigate("DETAIL", {
+      screen: "DETAIL_DETAIL",
+      params: {
+        state: 2,
+        id: route.params.ProductId ? route.params.ProductId : route.params.id,
+        name: name.name,
+      },
+    });
   };
+
   useEffect(() => {
     navigation.setOptions({
       headerStyle: {backgroundColor: "#fff"},

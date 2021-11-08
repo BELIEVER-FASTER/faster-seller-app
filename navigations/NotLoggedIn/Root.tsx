@@ -28,6 +28,7 @@ export const Root = () => {
         contentStyle: {backgroundColor: "#fff"},
         headerTitle: "",
       }}
+      initialRouteName="LOGIN"
     >
       <Nav.Screen name="LOGIN" component={Login} options={{headerShown: false}} />
       <Nav.Screen name="SIGNUP1" component={SU1} options={{headerBackTitle: "로그인"}} />

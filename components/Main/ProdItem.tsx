@@ -43,7 +43,10 @@ export default function ProdItem({item}: ProdItemProps): JSX.Element {
     return Alert.alert("상품삭제", "정말 상품을 삭제하시겠습니까?", [
       {
         text: "네",
-        onPress: () => removeProductDispatch({ProductId: item.id, name: item.name}),
+        onPress: () => {
+          removeProductDispatch({ProductId: item.id, name: item.name});
+          navigation.navigate("MAIN");
+        },
       },
       {
         text: "취소",
@@ -84,7 +87,7 @@ export default function ProdItem({item}: ProdItemProps): JSX.Element {
               원
             </PIPrice>
             {isUpdatedPr ? (
-              <RemovedPrice>{item.UpdatedProduct?.price.toLocaleString()}원</RemovedPrice>
+              <RemovedPrice>{item.price.toLocaleString()}원</RemovedPrice>
             ) : (
               <></>
             )}

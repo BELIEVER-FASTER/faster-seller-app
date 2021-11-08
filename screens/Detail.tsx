@@ -13,11 +13,11 @@ import {
 import {MaterialIcons} from "@expo/vector-icons";
 import {DetailStackParamList} from "../navigations/LoggedIn/DetailStack";
 import HeaderBtn from "../components/Detail/HeaderBtn";
-import {ProdDetail} from "../mock/prodDetail";
 import Images from "../components/Detail/Images";
 import ColorList from "../components/Detail/ColorList";
 import SizeTable from "../components/Detail/SizeTable";
 import {useProduct} from "../modules/product";
+import Loading from "../components/Common/Loading";
 
 interface DetailData
   extends NativeStackScreenProps<DetailStackParamList, "DETAIL_DETAIL"> {}
@@ -29,7 +29,7 @@ export default function Detail({route, navigation}: DetailData) {
     loadDetail,
     removeProductDispatch,
     existData,
-    setReloadBlockDispatch,
+    resetDetailDispatch,
   } = useProduct();
 
   useEffect(() => {
@@ -37,7 +37,6 @@ export default function Detail({route, navigation}: DetailData) {
       type: route.params.state === 2 ? "updated" : "exist",
       productId: +route.params.id,
     });
-    setReloadBlockDispatch(true);
     return () => {
       resetExistDispatch();
     };
@@ -58,6 +57,7 @@ export default function Detail({route, navigation}: DetailData) {
     });
     navigation.navigate("MAIN");
   };
+
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
@@ -122,8 +122,14 @@ export default function Detail({route, navigation}: DetailData) {
     }
     return false;
   };
+  useEffect(() => {
+    return () => {
+      resetDetailDispatch();
+    };
+  }, []);
+  if (loadDetail.loading) return <Loading />;
+  if (!loadDetail.data) return <Loading />;
 
-  if (!loadDetail.data) return <></>;
   return (
     <>
       <StatusBar translucent backgroundColor="#fff" barStyle="dark-content" />
@@ -136,7 +142,7 @@ export default function Detail({route, navigation}: DetailData) {
                 {cateChanged() ? (
                   <Text
                     style={{...style["1.1"], ...style.uValue, fontSize: 12}}
-                  >{`${loadDetail.data.CategoryMain.name} > ${loadDetail.data.CategoryMiddle.name}`}</Text>
+                  >{`${existData.data?.CategoryMain.name} > ${existData.data?.CategoryMiddle.name}`}</Text>
                 ) : (
                   <></>
                 )}
@@ -144,14 +150,26 @@ export default function Detail({route, navigation}: DetailData) {
                   style={style["1.1"]}
                 >{`${loadDetail.data.CategoryMain.name} > ${loadDetail.data.CategoryMiddle.name}`}</Text>
               </View>
-              <Text style={{fontSize: 14, fontWeight: "bold"}}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: "bold",
+                  paddingHorizontal: 8,
+                  paddingVertical: 4,
+                  color: "#fff",
+                  backgroundColor:
+                    (existData.data ? existData.data : loadDetail.data).isActive === 1
+                      ? "#006db3"
+                      : "#f41845",
+                }}
+              >
                 {(existData.data ? existData.data : loadDetail.data).isActive === 1
                   ? "판매중"
                   : "품절"}
               </Text>
             </View>
             <View style={style.titleBox}>
-              {nameChanged() && <Text style={style.uValue}>{loadDetail.data.name}</Text>}
+              {nameChanged() && <Text style={style.uValue}>{existData.data?.name}</Text>}
               <Text style={style[2]}>{loadDetail.data.name}</Text>
             </View>
             <View style={{...style.valueBox, justifyContent: "flex-end"}}>
@@ -210,17 +228,14 @@ export default function Detail({route, navigation}: DetailData) {
               </Text>
             </View>
           </View>
-          {ProdDetail.detail ? (
-            <View style={style.detailBox}>
-              <Text style={style.title}>디테일</Text>
-              {existData.data && loadDetail.data.detail !== existData.data.detail && (
-                <Text style={style.uValue}>{existData.data.detail}</Text>
-              )}
-              <Text style={style.value}>{loadDetail.data.detail}</Text>
-            </View>
-          ) : (
-            <></>
-          )}
+          <View style={style.detailBox}>
+            <Text style={style.title}>디테일</Text>
+            {existData.data && loadDetail.data.detail !== existData.data.detail && (
+              <Text style={style.uValue}>{existData.data.detail}</Text>
+            )}
+            <Text style={style.value}>{loadDetail.data.detail}</Text>
+          </View>
+          <View style={{height: 50}} />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -254,6 +269,9 @@ const style = StyleSheet.create({
   title: {fontSize: 16, paddingVertical: 8},
   valueBox: {flexDirection: "row", alignItems: "center"},
   titleBox: {justifyContent: "center", paddingVertical: 8},
-  value: {fontSize: 20, fontWeight: "bold"},
+  value: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   uValue: {fontSize: 16, textDecorationLine: "line-through", paddingRight: 5},
 });

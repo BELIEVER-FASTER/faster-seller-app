@@ -2,13 +2,14 @@ import AppLoading from "expo-app-loading";
 import {useAssets} from "expo-asset";
 import {useFonts} from "expo-font";
 import React from "react";
+import {LogBox} from "react-native";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {Provider} from "react-redux";
 import store from "./modules";
 import RootApp from "./Root";
 
 const query = new QueryClient();
-
+LogBox.ignoreLogs(["Setting a timer"]);
 export default function App() {
   const [loaded] = useFonts({
     Spoqa: require("./assets/fonts/SpoqaHanSansNeo-Regular.ttf"),

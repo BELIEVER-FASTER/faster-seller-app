@@ -8,7 +8,7 @@ type ColorListProps = {
     Color: {
       id: number;
       name: string;
-      hex: string;
+      hex?: string;
     };
   }[];
 };

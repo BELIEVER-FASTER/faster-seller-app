@@ -6,7 +6,7 @@ const {height} = Dimensions.get("window");
 
 type ImagesProps = {
   images: {
-    id: number;
+    id?: number;
     src: string;
     filename: string;
   }[];
@@ -33,7 +33,7 @@ export default function Images({images}: ImagesProps) {
             style={StyleSheet.absoluteFill}
             resizeMode="cover"
             source={{
-              uri: `https://faster-seller.s3.ap-northeast-2.amazonaws.com/original/product/${image.filename}`,
+              uri: `https://faster-seller.s3.ap-northeast-2.amazonaws.com/resize/600/product/${image.filename}`,
             }}
           />
         </View>

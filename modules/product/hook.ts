@@ -11,7 +11,7 @@ import {
   updateProductAction,
 } from ".";
 import {useAppDispatch, useAppSelector} from "..";
-import {resetExist, resetRegist, setPage, setReloadBlock} from "./slice";
+import {resetDetail, resetExist, resetRegist, setPage, setReloadBlock} from "./slice";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useProduct() {
@@ -50,6 +50,10 @@ export function useProduct() {
 
   const resetExistDispatch = useCallback(() => {
     dispatch(resetExist());
+  }, []);
+
+  const resetDetailDispatch = useCallback(() => {
+    dispatch(resetDetail());
   }, []);
 
   const addProductDispatch = useCallback((data: ProductPayload["addProduct"]) => {
@@ -101,5 +105,6 @@ export function useProduct() {
     loadProductCntDispatch,
     setPageDispatch,
     setReloadBlockDispatch,
+    resetDetailDispatch,
   };
 }

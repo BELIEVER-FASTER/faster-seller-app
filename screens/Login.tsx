@@ -21,7 +21,7 @@ export default function Login() {
   const [email, onChangeEmail] = useInput();
   const [password, onChangePassword] = useInput();
   const {loginDispatch, resetSignUpDispatch} = useAuth();
-  const [obOpen, setObOpen] = useState(true);
+  const [obOpen, setObOpen] = useState(false);
   const navigation = useNavigation();
   const go2 = () => {
     navigation.navigate("SIGNUP1");
@@ -32,6 +32,11 @@ export default function Login() {
   };
   useEffect(() => {
     resetSignUpDispatch();
+  }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setObOpen(true);
+    }, 200);
   }, []);
   return (
     <>
