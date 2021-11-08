@@ -3,9 +3,10 @@ import React from "react";
 import {ProdDetail} from "../../mock/prodDetail";
 import Detail from "../../screens/Detail";
 import Edit from "../../screens/Edit";
+import {ProdListItem} from "../../utils/data";
 
 export type DetailStackParamList = {
-  DETAIL_DETAIL: {name: string};
+  DETAIL_DETAIL: ProdListItem;
   DETAIL_EDIT: ProdDetail;
 };
 const Nav = createNativeStackNavigator();

@@ -11,7 +11,7 @@ export default function RootApp() {
   return (
     <SignUpFormProvider>
       <NavigationContainer>
-        {/* <Root2 /> */}
+        {/* <Root /> */}
         {!login.data ? <Root2 /> : <Root />}
       </NavigationContainer>
       <Toast />

@@ -37,7 +37,6 @@ export default function ProdList({keyword, sort}: ProdListProps): JSX.Element {
 
   const renderItem: ListRenderItem<ProdListItem> = ({item}) => <ProdItem item={item} />;
 
-  //   console.log({page, sort: sort.name, keyword, length: loadProductList.data?.length});
   return (
     <FlatList
       refreshing={loadProductList.loading}

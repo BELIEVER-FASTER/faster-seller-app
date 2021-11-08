@@ -6,17 +6,17 @@ import {getName} from "../../utils/data";
 type SizeTableProps = {
   sizes: {
     id: number;
-    custom: null;
-    chest: null;
-    shoulder: null;
-    arm: null;
-    total: string;
-    waist: string;
-    rise: string;
-    thigh: string;
-    hem: string;
-    heel: null;
-    feet: null;
+    custom?: string;
+    chest?: string;
+    shoulder?: string;
+    arm?: string;
+    total?: string;
+    waist?: string;
+    rise?: string;
+    thigh?: string;
+    hem?: string;
+    heel?: string;
+    feet?: string;
     SizeOpt: {
       id: number;
       name: string;

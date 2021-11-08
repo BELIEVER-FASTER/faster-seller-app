@@ -37,7 +37,7 @@ export interface MyKnownError {
 export type ProductPayload = {
   loadProductList: {
     page?: number;
-    sort?: 'created' | 'name' | 'price';
+    sort?: "created" | "name" | "price";
     keyword?: string;
   };
   loadProductCnt: {
@@ -48,7 +48,7 @@ export type ProductPayload = {
     productId: number;
   };
   loadDetail: {
-    type: 'exist' | 'updated';
+    type: "exist" | "updated";
     productId: number;
   };
   addProduct: {
@@ -64,7 +64,7 @@ export type ProductPayload = {
     country: number;
     countryName: string;
     colors: Color[];
-    sizes: { id: number; value: string; detail?: { name: string; value: string }[] }[];
+    sizes: {id: number; value: string; detail?: {name: string; value: string}[]}[];
   };
   updateProduct: {
     ProductId: number;
@@ -80,9 +80,9 @@ export type ProductPayload = {
     country: number;
     countryName: string;
     colors: Color[];
-    sizes: { id: number; value: string; detail?: { name: string; value: string }[] }[];
+    sizes: {id: number; value: string; detail?: {name: string; value: string}[]}[];
   };
-  removeProduct: { ProductId: number; name: string };
+  removeProduct: {ProductId: number; name: string};
 };
 export type ProductListItem = {
   id: number;
@@ -92,7 +92,7 @@ export type ProductListItem = {
   createdAt: Date;
   isActive: number;
   state: number;
-  UpdatedProduct: { name: string; price: number; thumbnail: string } | null;
+  UpdatedProduct: {name: string; price: number; thumbnail: string} | null;
 };
 
 export type ProductDetail = {
@@ -143,24 +143,24 @@ export interface ProductColor {
 export interface Color {
   id: number;
   name: string;
-  hex?: string;
+  hex: string;
 }
 
 export interface PImage {
-  id?: number;
+  id: number;
   src: string;
   filename: string;
 }
 export interface ProductSize {
   id: number;
-  custom: string;
-  chest: null;
-  shoulder: null;
-  arm: null;
-  total: null;
-  waist: null;
-  rise: null;
-  thigh: null;
-  hem: null;
+  custom?: string;
+  chest?: string;
+  shoulder?: string;
+  arm?: string;
+  total?: string;
+  waist?: string;
+  rise?: string;
+  thigh?: string;
+  hem?: string;
   SizeOpt: CategoryMain;
 }

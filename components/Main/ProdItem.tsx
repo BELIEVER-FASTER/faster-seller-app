@@ -31,7 +31,6 @@ export default function ProdItem({item}: ProdItemProps): JSX.Element {
   const navigation = useNavigation();
   const {toggleActiveDispatch, removeProductDispatch} = useProduct();
   const toggleValue = () => {
-    console.log({isActive: item.isActive === 1 ? 0 : 1});
     toggleActiveDispatch({
       productId: item.id,
       isActive: item.isActive === 1 ? 0 : 1,
