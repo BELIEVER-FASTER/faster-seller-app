@@ -1,6 +1,6 @@
 import {useCallback} from "react";
 import {AuthPayload} from "./type";
-import {useAppDispatch, useAppSelector} from "..";
+import {useAppDispatch, useAppSelector} from "../hooks";
 import {
   addRecommAction,
   emailCheckAction,

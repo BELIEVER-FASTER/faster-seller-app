@@ -3,11 +3,17 @@ import React from "react";
 import {Keyboard, Text, TouchableWithoutFeedback, View} from "react-native";
 import Button from "../../components/Common/Button";
 import {DoubleBtnWrapper, MultiLineText, SignUpContainer} from "./styles";
+import * as Linking from "expo-linking";
 
 export default function SU7() {
   const navigation = useNavigation();
   const go2 = () => {
     navigation.navigate("LOGIN");
+  };
+  const linkToKakao = () => {
+    Linking.openURL("kakaoplus://plusfriend/home/_fZnrK").finally(() =>
+      navigation.navigate("LOGIN")
+    );
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -30,7 +36,7 @@ export default function SU7() {
         <View style={{flex: 1}} />
         <DoubleBtnWrapper>
           <Button title="나중에 등록하기" outlined onPress={go2} width="45%" />
-          <Button title="지금 등록하기" onPress={go2} width="45%" />
+          <Button title="지금 등록하기" onPress={linkToKakao} width="45%" />
         </DoubleBtnWrapper>
       </SignUpContainer>
     </TouchableWithoutFeedback>

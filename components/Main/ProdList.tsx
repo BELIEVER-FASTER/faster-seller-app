@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
-import {FlatList, Image, ListRenderItem, Text, View} from "react-native";
+import {FlatList, ListRenderItem, View} from "react-native";
 import {useProduct} from "../../modules/product";
 import {FilterType, ProdListItem} from "../../utils/data";
 import ProdItem from "./ProdItem";
 import Skelleton from "./Skelleton";
-import {ProdListEndBox, ProdListEndText} from "./styles";
+// import {ProdListEndBox, ProdListEndText} from "./styles";
 
 type ProdListProps = {
   keyword: string;

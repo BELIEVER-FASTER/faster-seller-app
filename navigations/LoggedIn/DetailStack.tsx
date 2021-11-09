@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import React from "react";
-import {ProdDetail} from "../../mock/prodDetail";
+import {ProdDetail} from "../../modules/product";
 import Detail from "../../screens/Detail";
 import Edit from "../../screens/Edit";
 import {ProdListItem} from "../../utils/data";
@@ -19,8 +19,16 @@ export const DetailStack = () => {
         contentStyle: {backgroundColor: "#fff"},
       }}
     >
-      <Nav.Screen name="DETAIL_DETAIL" component={Detail} />
-      <Nav.Screen name="DETAIL_EDIT" component={Edit} />
+      <Nav.Screen
+        name="DETAIL_DETAIL"
+        component={Detail}
+        options={{headerBackTitle: "상세정보", title: ""}}
+      />
+      <Nav.Screen
+        name="DETAIL_EDIT"
+        component={Edit}
+        options={{headerBackTitle: "상세정보", title: ""}}
+      />
     </Nav.Navigator>
   );
 };

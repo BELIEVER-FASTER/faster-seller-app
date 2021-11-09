@@ -5,12 +5,12 @@ import {
   loadExistAction,
   loadProductCntAction,
   loadProductListAction,
-  ProductPayload,
   removeProductAction,
   toggleActiveAction,
   updateProductAction,
-} from ".";
-import {useAppDispatch, useAppSelector} from "..";
+} from "./thunk";
+import {ProductPayload} from "./type";
+import {useAppDispatch, useAppSelector} from "../hooks";
 import {resetDetail, resetExist, resetRegist, setPage, setReloadBlock} from "./slice";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

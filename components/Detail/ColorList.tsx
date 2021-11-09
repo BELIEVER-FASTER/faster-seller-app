@@ -19,24 +19,34 @@ export default function ColorList({colors}: ColorListProps): JSX.Element {
         <View
           key={color.id}
           style={{
-            width: 50,
-            height: 50,
+            height: 24,
+            paddingHorizontal: 8,
             borderWidth: 1,
             borderColor: "#aaa",
-            marginRight: 16,
+            marginRight: 12,
+            flex: 1,
+            justifyContent: "center",
           }}
         >
           {getColor(color.Color.name as ColorName).background.indexOf("#") !== -1 ? (
             <View
               style={{
-                flex: 1,
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
                 backgroundColor: getColor(color.Color.name as ColorName).background,
               }}
             />
           ) : (
             <Image
               style={{
-                flex: 1,
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
               }}
               source={{
                 uri: getColor(color.Color.name as ColorName).background.slice(
@@ -46,7 +56,14 @@ export default function ColorList({colors}: ColorListProps): JSX.Element {
               }}
             />
           )}
-          <Text style={{color: "#000", textAlign: "center"}}>{color.Color.name}</Text>
+          <Text
+            style={{
+              color: getColor(color.Color.name as ColorName).color,
+              textAlign: "center",
+            }}
+          >
+            {color.Color.name}
+          </Text>
         </View>
       ))}
     </ScrollView>

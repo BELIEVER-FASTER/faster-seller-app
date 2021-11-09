@@ -57,8 +57,9 @@ export default function SU4() {
         />
         <View style={{height: 24}} />
         <Input
+          type="numeric"
           label="계좌번호를 적어주세요"
-          placeholder="예시:1234-1234-12-12"
+          placeholder="'-'를 제외하고 적어주세요"
           value={accNum.accNum}
           onChange={accNum.onChangeAccNum}
         />

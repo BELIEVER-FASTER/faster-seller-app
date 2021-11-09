@@ -2,7 +2,7 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import auth from "./auth/slice";
 import product from "./product/slice";
-import ui from "./ui";
+import ui from "./ui/slice";
 
 const prod = process.env.NODE_ENV === "production";
 const rootReducer = combineReducers({auth, product, ui});

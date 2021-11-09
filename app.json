@@ -2,13 +2,13 @@
   "expo": {
     "name": "seller-app",
     "slug": "seller-app",
-    "version": "1.0.0",
+    "version": "0.9.0",
     "assetBundlePatterns": ["**/*"],
-    "icon": "./assets/images/appstore.png",
+    "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/images/appstore.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#5C488A"
     }
   },
   "name": "seller-app"

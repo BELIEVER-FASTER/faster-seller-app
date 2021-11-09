@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, Modal, Pressable, Text, View} from "react-native";
+import {Image, Modal, Platform, Pressable, Text, View} from "react-native";
 
 type ImageDescObProps = {
   x: number;
@@ -18,7 +18,7 @@ export default function ImageDescOB({x, y, onToggle}: ImageDescObProps): JSX.Ele
             width: 20,
             height: 20,
             position: "absolute",
-            top: y,
+            top: Platform.OS === "android" ? y + 35 : y,
             left: x,
           }}
           source={require("../../assets/images/question.png")}
@@ -28,7 +28,7 @@ export default function ImageDescOB({x, y, onToggle}: ImageDescObProps): JSX.Ele
             height: 50,
             backgroundColor: "#fff",
             position: "absolute",
-            top: y + 30,
+            top: (Platform.OS === "android" ? y + 35 : y) + 30,
             left: x - 10,
             borderRadius: 6,
             paddingVertical: 4,

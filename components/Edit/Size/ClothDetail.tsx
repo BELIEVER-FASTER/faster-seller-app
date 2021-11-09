@@ -85,6 +85,7 @@ export default function ClothSizeDetail({
               {(mainCate.id === 8 ? skirtDetailSizes : bottomDetailSizes).map((szn) => (
                 <DetailTextBox key={szn.id}>
                   <DetailTextInput
+                    keyboardType="numbers-and-punctuation"
                     placeholderTextColor="#777"
                     placeholder={szn.name}
                     onChangeText={(e) => {

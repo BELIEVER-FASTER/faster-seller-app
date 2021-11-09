@@ -9,7 +9,7 @@ import store from "./modules";
 import RootApp from "./Root";
 
 const query = new QueryClient();
-LogBox.ignoreLogs(["Setting a timer"]);
+LogBox.ignoreLogs(["Setting a timer", "Require cycle"]);
 export default function App() {
   const [loaded] = useFonts({
     Spoqa: require("./assets/fonts/SpoqaHanSansNeo-Regular.ttf"),

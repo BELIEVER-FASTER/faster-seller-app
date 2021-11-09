@@ -1,9 +1,9 @@
-import _delay from 'lodash/delay';
-import { useCallback } from 'react';
-import { Dispatch } from 'redux';
-import { loadCategoryListAct, loadColorListAct, loadStoreListAct } from '.';
-import { useAppDispatch, useAppSelector } from '..';
-import { toastOpen, toastInitialize, toastClose } from './slice';
+import _delay from "lodash/delay";
+import {useCallback} from "react";
+import {Dispatch} from "redux";
+import {loadCategoryListAct, loadColorListAct, loadStoreListAct} from "./thunk";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {toastOpen, toastInitialize, toastClose} from "./slice";
 
 export const toastPopAction = async (
   dispatch: Dispatch,
@@ -17,8 +17,8 @@ export const toastPopAction = async (
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useUI() {
-  const { toastPopUp, storeList, colorList, categoryList } = useAppSelector(
-    state => state.ui
+  const {toastPopUp, storeList, colorList, categoryList} = useAppSelector(
+    (state) => state.ui
   );
   const dispatch = useAppDispatch();
 

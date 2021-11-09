@@ -16,8 +16,9 @@ type LoginInputProps = {
   type: "email" | "pwd";
   value: string;
   onChange: (e: string) => void;
+  onSubmit?: () => void;
 };
-const LoginInput = ({placeholder, type, value, onChange}: LoginInputProps) => {
+const LoginInput = ({placeholder, type, value, onChange, onSubmit}: LoginInputProps) => {
   return (
     <LoginInputContainer>
       <FontAwesome5 name={type === "email" ? "user" : "unlock"} size={20} color="#fff" />
@@ -28,6 +29,7 @@ const LoginInput = ({placeholder, type, value, onChange}: LoginInputProps) => {
         placeholderTextColor="#aaa"
         placeholder={placeholder}
         secureTextEntry={type === "pwd"}
+        onSubmitEditing={onSubmit ? onSubmit : () => null}
       ></LoginInputBox>
     </LoginInputContainer>
   );

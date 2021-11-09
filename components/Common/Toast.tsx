@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import {Animated, Text} from "react-native";
-import {useUI} from "../../modules/ui";
+import {useUI} from "../../modules/ui/hook";
 import {ToastPopUpBox, ToastPopUpContent} from "./styles";
 
 const A_Content = Animated.createAnimatedComponent(ToastPopUpBox);

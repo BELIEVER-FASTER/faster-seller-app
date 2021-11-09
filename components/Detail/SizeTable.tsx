@@ -27,7 +27,7 @@ export default function SizeTable({sizes}: SizeTableProps): JSX.Element {
   const tableData = {
     tableTitle: [...sizes.map((size) => size.SizeOpt.name)],
     tableHead: [
-      "",
+      "사이즈",
       ...Object.entries(sizes[0])
         .map(([key, value]) => {
           if (value && key !== "id" && key !== "SizeOpt") return getName(key);
@@ -39,6 +39,16 @@ export default function SizeTable({sizes}: SizeTableProps): JSX.Element {
         return Object.entries(item)
           .map(([key, value]) => {
             if (value && key !== "id" && key !== "SizeOpt") return value;
+            if (
+              [
+                ...Object.entries(sizes[0])
+                  .map(([key, value]) => {
+                    if (value && key !== "id" && key !== "SizeOpt") return key;
+                  })
+                  .filter((v) => v !== undefined),
+              ].findIndex((v) => v === key) !== -1
+            )
+              return "-";
           })
           .filter((v) => v !== undefined);
       }),

@@ -93,25 +93,26 @@ export const getColor = (
     case "보라":
       return {background: "#685292", color: "#fff"};
     case "연청":
-      return {background: "url(https://i.ibb.co/K291GGK/lj.png)", color: "#fff"};
+      return {background: "url(https://i.ibb.co/Scf1g70/image-21.png)", color: "#fff"};
     case "중청":
       return {
-        background: "url(https://i.ibb.co/8NpnSmx/j.png)",
+        background: "url(https://i.ibb.co/ZYQ0xyG/Middle-Jean.png)",
         color: "#fff",
         backgroundPosition: "center",
         backgroundSize: "cover",
       };
     case "진청":
-      return {background: "url(https://i.ibb.co/gdvDCXv/dj.png)", color: "#fff"};
+      return {background: "url(https://i.ibb.co/HPpq34Q/Hight-Jean.png)", color: "#fff"};
     case "회청":
       return {
-        background: "url(https://i.ibb.co/3v4yRWY/gj.png)",
+        background:
+          "url(https://i.ibb.co/Z6jzfsG/513a60c32a104f6f9d7f7f042d3e0f20-20210528124725-1.png)",
         color: "#fff",
         backgroundPosition: "center",
       };
     case "흑청":
       return {
-        background: "url(https://i.ibb.co/fXNsYdm/bj.png)",
+        background: "url(https://i.ibb.co/Lz7fCMj/Black-Jean.png)",
         color: "#fff",
         backgroundSize: "cover",
       };

@@ -5,13 +5,11 @@ import {
   loadExistAction,
   loadProductCntAction,
   loadProductListAction,
-  ProductDetail,
-  ProductListItem,
-  ProductState,
   removeProductAction,
   toggleActiveAction,
   updateProductAction,
-} from ".";
+} from "./thunk";
+import {ProductListItem, ProductState} from "./type";
 
 const initialState: ProductState = {
   loadProductList: {loading: false, data: null, error: null},

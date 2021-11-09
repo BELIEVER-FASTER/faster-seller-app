@@ -143,7 +143,7 @@ export const DetailTextBox = styled.View`
   align-items: center;
 `;
 export const DetailTextInput = styled.TextInput`
-  font-size: 15px;
+  font-size: 16px;
   padding: 8px 9px;
   flex: 1;
 `;

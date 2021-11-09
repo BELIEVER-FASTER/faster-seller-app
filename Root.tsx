@@ -10,10 +10,7 @@ export default function RootApp() {
   const {login} = useAuth();
   return (
     <SignUpFormProvider>
-      <NavigationContainer>
-        {/* <Root /> */}
-        {!login.data ? <Root2 /> : <Root />}
-      </NavigationContainer>
+      <NavigationContainer>{!login.data ? <Root2 /> : <Root />}</NavigationContainer>
       <Toast />
     </SignUpFormProvider>
   );

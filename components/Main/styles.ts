@@ -159,3 +159,13 @@ export const ProdListEndBox = styled.View`
 export const ProdListEndText = styled.Text`
   font-size: 17px;
 `;
+export const EmptyViewBox = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+export const EmptyViewText = styled.Text`
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+`;

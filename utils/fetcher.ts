@@ -29,3 +29,11 @@ export const getStoreList = async () => {
     console.error(e);
   }
 };
+export const getTotalCnt = async () => {
+  try {
+    const {data} = await axios.get<number>("/seller/product/count");
+    return data;
+  } catch (e) {
+    console.error(e);
+  }
+};
