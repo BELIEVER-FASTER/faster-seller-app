@@ -38,21 +38,6 @@ export default function Update(): JSX.Element {
     if (!country.country) return Alert.alert("제조국가를 입력해주세요");
     if (country.country === "3" && !etcCountry.etcCountry.trim())
       return Alert.alert("제조국가명을 입력해주세요");
-    console.log({
-      // BrandId: userData.id,
-      CategoryMainId: cate.cate?.main.id as number,
-      CategoryMiddleId: cate.cate?.middle.id as number,
-      images: images.images,
-      name: name.name,
-      price: price.price,
-      isPiece: leaf.leaf,
-      composition: mixture.mixture,
-      country: +country.country,
-      countryName: etcCountry.etcCountry,
-      sizes: sizes.sizes,
-      detail: detailInfo.detailInfo,
-      colors: colors.colors,
-    });
   };
   useEffect(() => {
     navigation.setOptions({
@@ -74,21 +59,6 @@ export default function Update(): JSX.Element {
     detailInfo,
     etcCountry,
   ]);
-  // console.log({
-  //   // BrandId: userData.id,
-  //   CategoryMainId: cate.cate?.main.id as number,
-  //   CategoryMiddleId: cate.cate?.middle.id as number,
-  //   images: images.images,
-  //   name: name.name,
-  //   price: price.price,
-  //   isPiece: leaf.leaf,
-  //   composition: mixture.mixture,
-  //   country: +country.country,
-  //   countryName: etcCountry.etcCountry,
-  //   sizes: sizes.sizes,
-  //   detail: detailInfo.detailInfo,
-  //   colors: colors.colors,
-  // });
   return (
     <>
       <StatusBar translucent backgroundColor="#fff" barStyle="dark-content" />

@@ -1,4 +1,4 @@
-package com.sellerapp;
+package com.believer.fstr;
 
 import android.os.Bundle;
 

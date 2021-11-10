@@ -18,7 +18,12 @@ export default function App() {
     SpoqaMedium: require("./assets/fonts/SpoqaHanSansNeo-Medium.ttf"),
     SpoqaThin: require("./assets/fonts/SpoqaHanSansNeo-Thin.ttf"),
   });
-  const [assets] = useAssets([require("./assets/images/loginBg.png")]);
+  const [assets] = useAssets([
+    require("./assets/images/loginBg.png"),
+    require("./assets/images/ob.png"),
+    require("./assets/images/loading.gif"),
+    require("./assets/images/Logo.png"),
+  ]);
 
   if (!loaded || !assets) return <AppLoading />;
   return (

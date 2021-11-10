@@ -1,7 +1,7 @@
 import {useNavigation} from "@react-navigation/core";
 import {StatusBar} from "expo-status-bar";
 import React from "react";
-import {Alert, Keyboard, Text, TouchableWithoutFeedback, View} from "react-native";
+import {Alert, Keyboard, TouchableWithoutFeedback, View} from "react-native";
 import Button from "../../components/Common/Button";
 import Input from "../../components/Common/Input";
 import {useSF} from "../../hooks/SignUpFormProvider";
@@ -12,10 +12,12 @@ export default function SU1() {
   const navigation = useNavigation();
   const {email, pwd, pwdCheck} = useSF();
   const go2 = () => {
-    if (!email.email || email.emailError) return Alert.alert(email.emailError);
-    if (!pwd.pwd || pwd.pwdError) return Alert.alert(pwd.pwdError);
-    if (!pwdCheck.pwdCheck || pwdCheck.pwdCheckError)
-      return Alert.alert("비밀번호가 일치하지 않습니다.");
+    if (!email.email) return Alert.alert("이메일을 입력해주세요.");
+    if (!pwd.pwd) return Alert.alert("비밀번호를 입력해주세요.");
+    if (!pwdCheck.pwdCheck) return Alert.alert("비밀번호확인을 입력해주세요.");
+    if (email.emailError) return Alert.alert(email.emailError);
+    if (pwd.pwdError) return Alert.alert(pwd.pwdError);
+    if (pwdCheck.pwdCheckError) return Alert.alert("비밀번호가 일치하지 않습니다.");
     navigation.navigate("SIGNUP2");
   };
   return (

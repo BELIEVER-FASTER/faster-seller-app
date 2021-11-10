@@ -35,6 +35,8 @@ export default function Login() {
     setObOpen(false);
   };
   const onLogin = () => {
+    if (!email.trim()) return Alert.alert("이메일을 입력해주세요");
+    if (!password.trim()) return Alert.alert("비밀번호를 입력해주세요");
     return Alert.alert("자동로그인", "로그인없이 앱을 사용하시겠습니까?", [
       {
         text: "네",
@@ -62,7 +64,6 @@ export default function Login() {
   useEffect(() => {
     AsyncStorage.getItem("loginOB").then((res) => {
       if (!res) {
-        console.log(res);
         setTimeout(() => {
           setObOpen(true);
         }, 200);
@@ -72,7 +73,7 @@ export default function Login() {
     });
   }, []);
   useEffect(() => {
-    AsyncStorage.multiRemove(["email", "password", "loginOB", "mainOB"]);
+    // AsyncStorage.multiRemove(["email", "password", "loginOB", "mainOB"]);
     AsyncStorage.multiGet(["email", "pwd"]).then((res) => {
       const email = res[0][1] || null;
       const password = res[1][1] || null;

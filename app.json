@@ -1,15 +1,26 @@
 {
   "expo": {
-    "name": "seller-app",
-    "slug": "seller-app",
+    "name": "패스터 - 도매 브랜드 전용",
+    "slug": "faster-seller",
     "version": "0.9.0",
+    "owner":"believer-co",
     "assetBundlePatterns": ["**/*"],
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#5C488A"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.believer.fasterseller",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.believer.sellerapp",
+      "versionCode": 1,
+      "permissions": []
     }
   },
-  "name": "seller-app"
+  "name": "패스터 - 도매 브랜드 전용"
 }

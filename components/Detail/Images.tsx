@@ -2,7 +2,7 @@ import React from "react";
 import {Dimensions, Image, StyleSheet, View} from "react-native";
 import Swiper from "react-native-swiper";
 
-const {height} = Dimensions.get("window");
+const {width} = Dimensions.get("window");
 
 type ImagesProps = {
   images: {
@@ -22,7 +22,7 @@ export default function Images({images}: ImagesProps) {
       autoplayTimeout={3}
       containerStyle={{
         width: "100%",
-        height: height / 3,
+        height: width,
         backgroundColor: "#aaa",
         marginBottom: 20,
       }}
