@@ -8,7 +8,7 @@ import {
   ProdInputText,
   ProdInputBox,
 } from "./styles";
-import {KeyboardTypeOptions, Text} from "react-native";
+import {KeyboardTypeOptions, StyleProp, Text, ViewStyle} from "react-native";
 
 type LoginInputProps = {
   label?: string;
@@ -44,9 +44,12 @@ type ProdInputProps = {
   unit?: string;
   desc?: string;
   type?: "default" | "numeric";
+  style?: StyleProp<ViewStyle>;
+  onFocus?: () => void;
 };
 
 function ProdInput({
+  style,
   label,
   placeholder,
   value,
@@ -55,13 +58,15 @@ function ProdInput({
   desc = "",
   unit = "",
   type = "default",
+  onFocus,
 }: ProdInputProps) {
   return (
-    <CommonInputWrapper>
+    <CommonInputWrapper style={style}>
       <Text style={{fontSize: 16, fontWeight: "bold"}}>{label}</Text>
       {desc ? <Text style={{fontSize: 14, marginTop: 6}}>{desc}</Text> : <></>}
       <ProdInputBox>
         <ProdInputText
+          onFocus={onFocus}
           autoCapitalize="none"
           keyboardType={type}
           multiline={multiline}

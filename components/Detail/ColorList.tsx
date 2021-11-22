@@ -14,7 +14,7 @@ type ColorListProps = {
 };
 export default function ColorList({colors}: ColorListProps): JSX.Element {
   return (
-    <ScrollView horizontal style={{flexDirection: "row"}}>
+    <ScrollView horizontal style={{flexDirection: "row", paddingBottom: 9}}>
       {colors.map((color) => (
         <View
           key={color.id}

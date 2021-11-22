@@ -102,7 +102,7 @@ export const getColor = (
         backgroundSize: "cover",
       };
     case "진청":
-      return {background: "url(https://i.ibb.co/HPpq34Q/Hight-Jean.png)", color: "#fff"};
+      return {background: "url(https://i.ibb.co/tXsDxnh/Hight-Jean.png)", color: "#fff"};
     case "회청":
       return {
         background:
