@@ -1,4 +1,5 @@
 import React from "react";
+import {FakeCurrencyInput} from "react-native-currency-input";
 import {FontAwesome5} from "@expo/vector-icons";
 import {
   LoginInputContainer,
@@ -7,6 +8,7 @@ import {
   CommonInputText,
   ProdInputText,
   ProdInputBox,
+  PriceTextValue,
 } from "./styles";
 import {KeyboardTypeOptions, StyleProp, Text, ViewStyle} from "react-native";
 
@@ -46,6 +48,7 @@ type ProdInputProps = {
   type?: "default" | "numeric";
   style?: StyleProp<ViewStyle>;
   onFocus?: () => void;
+  setValue?: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function ProdInput({
@@ -75,6 +78,50 @@ function ProdInput({
           placeholder={placeholder}
           placeholderTextColor="#888"
         />
+        {unit ? <Text style={{fontWeight: "bold"}}>{unit}</Text> : <></>}
+      </ProdInputBox>
+    </CommonInputWrapper>
+  );
+}
+function PriceInput({
+  style,
+  label,
+  placeholder,
+  value,
+  onChange,
+  setValue,
+  multiline = false,
+  desc = "",
+  unit = "",
+  type = "default",
+}: ProdInputProps) {
+  const onBlur = () => {
+    if (setValue && value) {
+      setValue(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
+  };
+  const onFocus = () => {
+    if (setValue && value) {
+      setValue(value.split(",").join(""));
+    }
+  };
+  return (
+    <CommonInputWrapper style={style}>
+      <Text style={{fontSize: 16, fontWeight: "bold"}}>{label}</Text>
+      {desc ? <Text style={{fontSize: 14, marginTop: 6}}>{desc}</Text> : <></>}
+      <ProdInputBox>
+        <ProdInputText
+          autoCapitalize="none"
+          keyboardType={type}
+          multiline={multiline}
+          onChangeText={onChange}
+          value={value}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          placeholder={placeholder}
+          placeholderTextColor="#888"
+        />
+        {/* <PriceTextValue>asdasdasd</PriceTextValue> */}
         {unit ? <Text style={{fontWeight: "bold"}}>{unit}</Text> : <></>}
       </ProdInputBox>
     </CommonInputWrapper>
@@ -115,5 +162,6 @@ function Input({
 
 Input.Login = LoginInput;
 Input.Prod = ProdInput;
+Input.Price = PriceInput;
 
 export default Input;

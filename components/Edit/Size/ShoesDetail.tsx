@@ -79,7 +79,7 @@ export default function ShoesSizeDetail({
             {shoesDetailSizes.map((szn) => (
               <DetailTextBox key={szn.id}>
                 <DetailTextInput
-                  keyboardType="numbers-and-punctuation"
+                  keyboardType="numeric"
                   placeholderTextColor="#777"
                   placeholder={szn.name}
                   onChangeText={(e) => {

@@ -35,7 +35,7 @@ export const useSignupForm = () => {
   }, [emailCheck]);
 
   //NOTE:비밀번호
-  const [pwd, onChangePwd, , pwdError] = useInput("", {
+  const [pwd, onChangePwd, setPwd, pwdError] = useInput("", {
     regExp: /(?=.*\d)(?=.*[a-z]).{8,}/,
     message: "영어소문자, 숫자 포함 8자 이상 입력해주세요",
   });
@@ -50,7 +50,7 @@ export const useSignupForm = () => {
   };
 
   //NOTE:브랜드
-  const [brand, onChangeBrand] = useInput("");
+  const [brand, onChangeBrand, setBrand] = useInput("");
 
   //NOTE:상가
   const [store, setStore] = useState(0);
@@ -59,18 +59,18 @@ export const useSignupForm = () => {
   };
 
   //NOTE:위치
-  const [location, onChangeLocation] = useInput("");
+  const [location, onChangeLocation, setLocation] = useInput("");
 
   //NOTE:이름
-  const [name, onChangeName, , nameError] = useInput("", {
+  const [name, onChangeName, setName, nameError] = useInput("", {
     regExp: /^[가-힣\s]+$/,
     message: "한글로 입력해주세요",
   });
 
   //NOTE:전화번호
-  const [tel, , setTel, telError] = useInput("", {
-    regExp: /^\d{2,3}-\d{3,4}-\d{4}$/,
-    message: "***-****-**** 형식으로 입력해주세요",
+  const [tel, onChangeTelWithout, setTel, telError] = useInput("", {
+    regExp: /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/,
+    message: "올바른 휴대폰번호를 입력해주세요",
   });
   const onChangeTel = (e: string) => {
     const value = e;
@@ -85,17 +85,32 @@ export const useSignupForm = () => {
   };
 
   //NOTE:은행명
-  const [bank, onChangeBank] = useInput("");
+  const [bank, onChangeBank, setBank] = useInput("");
 
   //NOTE:계좌번호
-  const [accNum, onChangeAccNum] = useInput("");
+  const [accNum, onChangeAccNum, setAccNum] = useInput("");
 
   //NOTE:예금주
-  const [accName, onChangeAccName] = useInput("");
+  const [accName, onChangeAccName, setAccName] = useInput("");
 
   //NOTE:추천인
-  const [recommender, onChangeRecommender] = useInput("");
+  const [recommender, onChangeRecommender, setRecommender] = useInput("");
 
+  const resetForm = () => {
+    setEmail("");
+    setPwdCheck("");
+    setEmailError("");
+    setPwd("");
+    setPwdCheckError("");
+    setBrand("");
+    setStore(0);
+    setLocation("");
+    setName("");
+    setTel("");
+    setBank("");
+    setAccName(""), setAccNum("");
+    setRecommender("");
+  };
   return {
     email: {email, onChangeEmail, emailError},
     pwd: {pwd, onChangePwd, pwdError},
@@ -104,10 +119,11 @@ export const useSignupForm = () => {
     store: {store, onChangeStore},
     location: {location, onChangeLocation},
     name: {name, onChangeName, nameError},
-    tel: {tel, onChangeTel, telError},
+    tel: {tel, onChangeTel, telError, onChangeTelWithout},
     bank: {bank, onChangeBank},
     accNum: {accNum, onChangeAccNum},
     accName: {accName, onChangeAccName},
     recommender: {recommender, onChangeRecommender},
+    resetForm,
   };
 };

@@ -47,6 +47,8 @@ export default function SU2() {
   const navigation = useNavigation();
   const go2 = () => {
     if (!brand.brand) return Alert.alert("브랜드명을 입력해주세요");
+    if (!brand.brand.includes("/"))
+      return Alert.alert("한글패명 / 영문명을 모두 입력해주세요");
     if (!storeData.store) return Alert.alert("상가를 입력해주세요");
     if (!location.location) return Alert.alert("위치를 입력해주세요");
     navigation.navigate("SIGNUP3");
@@ -56,8 +58,8 @@ export default function SU2() {
       <SignUpContainer>
         <SignUpTitle>브랜드명을 입력해주세요.</SignUpTitle>
         <Input
-          label="브랜드명이 무엇있가요?"
-          value={brand.brand}
+          label="브랜드명이 무엇있가요? (한글명 / 영문명)"
+          value={brand.패brand}
           onChange={brand.onChangeBrand}
           placeholder="예시:패스터 / FASTER"
         />

@@ -4,13 +4,17 @@ import {Keyboard, Text, TouchableWithoutFeedback, View} from "react-native";
 import Button from "../../components/Common/Button";
 import {DoubleBtnWrapper, MultiLineText, SignUpContainer} from "./styles";
 import * as Linking from "expo-linking";
+import {useSF} from "../../hooks/SignUpFormProvider";
 
 export default function SU7() {
+  const {resetForm} = useSF();
   const navigation = useNavigation();
   const go2 = () => {
+    resetForm();
     navigation.navigate("LOGIN");
   };
   const linkToKakao = () => {
+    resetForm();
     Linking.openURL("kakaoplus://plusfriend/home/_fZnrK").finally(() =>
       navigation.navigate("LOGIN")
     );

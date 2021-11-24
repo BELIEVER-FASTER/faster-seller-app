@@ -74,12 +74,12 @@ const productSlice = createSlice({
           (v) => v.id === +payload
         ) as number;
         if (idx === -1) return;
-
+        const cState = (state.loadProductList.data as ProductListItem[])[idx].state;
         const isActive = (state.loadProductList.data as ProductListItem[])[idx].isActive;
         (state.loadProductList.data as ProductListItem[])[idx] = {
           ...(state.loadProductList.data as ProductListItem[])[idx],
           isActive: isActive === 1 ? 0 : 1,
-          state: 2,
+          state: cState === 1 ? 1 : 2,
         };
       })
       .addCase(loadDetailAction.pending, (state) => {
@@ -143,9 +143,11 @@ const productSlice = createSlice({
         ) as number;
         if (idx === -1) return;
 
+        const cState = (state.loadProductList.data as ProductListItem[])[idx].state;
+
         (state.loadProductList.data as ProductListItem[])[idx] = {
           ...(state.loadProductList.data as ProductListItem[])[idx],
-          state: 2,
+          state: cState === 1 ? 1 : 2,
           UpdatedProduct: {
             name: payload.name,
             price: payload.price,

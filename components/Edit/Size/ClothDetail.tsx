@@ -85,7 +85,7 @@ export default function ClothSizeDetail({
               {(mainCate.id === 8 ? skirtDetailSizes : bottomDetailSizes).map((szn) => (
                 <DetailTextBox key={szn.id}>
                   <DetailTextInput
-                    keyboardType="numbers-and-punctuation"
+                    keyboardType="numeric"
                     placeholderTextColor="#777"
                     placeholder={szn.name}
                     onChangeText={(e) => {
@@ -105,6 +105,7 @@ export default function ClothSizeDetail({
               {topDetailSizes.map((szn) => (
                 <DetailTextBox key={szn.id}>
                   <DetailTextInput
+                    keyboardType="numeric"
                     placeholderTextColor="#777"
                     value={
                       currentSize.detail?.filter((v) => v.name === szn.value)[0]?.value ||

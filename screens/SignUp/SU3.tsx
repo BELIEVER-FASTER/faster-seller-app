@@ -12,7 +12,8 @@ export default function SU3() {
   const {name, tel} = useSF();
   const go2 = () => {
     if (!name.name || name.nameError) return Alert.alert("정확한 이름을 알려주세요.");
-    if (!tel.tel || tel.telError) return Alert.alert("전화번호를 입력해주세요.");
+    if (!tel.tel) return Alert.alert("전화번호를 입력해주세요.");
+    if (tel.telError) return Alert.alert("올바른 휴대폰번호를 입력해주세요");
     navigation.navigate("SIGNUP4");
   };
   return (
@@ -29,9 +30,9 @@ export default function SU3() {
         <Input
           type="phone-pad"
           value={tel.tel}
-          onChange={tel.onChangeTel}
-          label="연락처를 알려주세요"
-          placeholder="예시:010-1234-5678"
+          onChange={tel.onChangeTelWithout}
+          label="연락처를 알려주세요 ( ' - ' 제외 )"
+          placeholder="예시:01012345678"
         />
         <View style={{flex: 1}} />
 

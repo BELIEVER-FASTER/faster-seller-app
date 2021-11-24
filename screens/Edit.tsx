@@ -3,11 +3,13 @@ import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import React, {useEffect, useRef} from "react";
 import {
   Alert,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import Input from "../components/Common/Input";
@@ -162,52 +164,57 @@ export default function Edit({route}: DetailData): JSX.Element {
           keyboardVerticalOffset={Platform.OS === "ios" ? 10 : 0}
         >
           <RegistContainer ref={scrollRef}>
-            <ImageInput image={images} />
-            <View style={{height: 30}} />
-            <Input.Prod
-              label="상품명"
-              placeholder="상품명을 입력해주세요. (최대 40자)"
-              onChange={name.onChangeName}
-              value={name.name}
-            />
-            <View style={{height: 30}} />
-            <Input.Prod
-              type="numeric"
-              unit="원"
-              label="상품가격"
-              placeholder="상품 가격을 입력해주세요."
-              onChange={price.onChangePrice}
-              value={price.price}
-            />
-            <View style={{height: 30}} />
-            <CategorySelect currentCate={cate} />
-            <View style={{height: 4}} />
-            <ColorSelect currentColor={colors} />
-            <View style={{height: 30}} />
-            <SizeSelect sizes={sizes} category={cate.cate} />
-            <View style={{height: 30}} />
-            <Input.Prod
-              desc="사용된 소재와 혼용률을 입력해주세요."
-              label="소재혼용률"
-              placeholder="ex_ 면 50, 레이온 40, 린넨 10 "
-              onChange={mixture.onChangeMixture}
-              value={mixture.mixture}
-            />
-            <View style={{height: 30}} />
-            <CountrySelect country={country} etcCountry={etcCountry} />
-            <View style={{height: 4}} />
-            <PieceSelect leaf={leaf} />
-            <View style={{height: 30}} />
-            <Input.Prod
-              onFocus={onFocus}
-              desc="상품 상세페이지에 보여집니다."
-              label="상품설명"
-              multiline
-              placeholder="상세 설명은 선택사항입니다."
-              style={{minHeight: 260, marginBottom: 40}}
-              onChange={detailInfo.onChangeDetailInfo}
-              value={detailInfo.detailInfo}
-            />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{flex: 1}}>
+              <>
+                <ImageInput image={images} />
+                <View style={{height: 30}} />
+                <Input.Prod
+                  label="상품명"
+                  placeholder="상품명을 입력해주세요. (최대 40자)"
+                  onChange={name.onChangeName}
+                  value={name.name}
+                />
+                <View style={{height: 30}} />
+                <Input.Price
+                  type="numeric"
+                  unit="원"
+                  label="상품가격"
+                  placeholder="상품 가격을 입력해주세요."
+                  onChange={price.onChangePrice}
+                  value={price.price}
+                  setValue={price.setPrice}
+                />
+                <View style={{height: 30}} />
+                <CategorySelect currentCate={cate} />
+                <View style={{height: 4}} />
+                <ColorSelect currentColor={colors} />
+                <View style={{height: 30}} />
+                <SizeSelect sizes={sizes} category={cate.cate} />
+                <View style={{height: 30}} />
+                <Input.Prod
+                  desc="사용된 소재와 혼용률을 입력해주세요."
+                  label="소재혼용률"
+                  placeholder="ex_ 면 50, 레이온 40, 린넨 10 "
+                  onChange={mixture.onChangeMixture}
+                  value={mixture.mixture}
+                />
+                <View style={{height: 30}} />
+                <CountrySelect country={country} etcCountry={etcCountry} />
+                <View style={{height: 4}} />
+                <PieceSelect leaf={leaf} />
+                <View style={{height: 30}} />
+                <Input.Prod
+                  onFocus={onFocus}
+                  desc="상품 상세페이지에 보여집니다."
+                  label="상품설명"
+                  multiline
+                  placeholder="상세 설명은 선택사항입니다."
+                  style={{minHeight: 260, marginBottom: 40}}
+                  onChange={detailInfo.onChangeDetailInfo}
+                  value={detailInfo.detailInfo}
+                />
+              </>
+            </TouchableWithoutFeedback>
           </RegistContainer>
         </KeyboardAvoidingView>
       </SafeAreaView>

@@ -49,14 +49,19 @@ export default function ImageInput({image}: ImageInputProps): JSX.Element {
         if (response.assets) {
           setUploading(true);
           const formData = new FormData();
-          response.assets.forEach((file) =>
+          response.assets.forEach((file) => {
+            if (file.type?.includes("gif"))
+              return Alert.alert(
+                "GIF 업로드 불가",
+                "GIF를 제외한 나머지 이미지가 등록되었습니다."
+              );
             formData.append("image", {
               name: file.fileName,
               type: file.type,
               uri:
                 Platform.OS === "android" ? file.uri : file.uri!.replace("file://", ""),
-            })
-          );
+            });
+          });
           setUploading(true);
           axios
             .post("https://api.fstr.shop/seller/upload/image/product", formData)

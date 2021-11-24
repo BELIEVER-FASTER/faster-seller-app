@@ -23,7 +23,8 @@ import * as Linking from "expo-linking";
 export default function Login() {
   const [email, onChangeEmail, setEmail] = useInput();
   const [password, onChangePassword, setPassword] = useInput();
-  const {loginDispatch, resetSignUpDispatch} = useAuth();
+  const {loginDispatch, resetSignUpDispatch, login} = useAuth();
+  const [remember, setRemember] = useState(false);
   const [obOpen, setObOpen] = useState(false);
   const navigation = useNavigation();
   const go2 = () => {
@@ -41,6 +42,7 @@ export default function Login() {
       {
         text: "네",
         onPress: () => {
+          setRemember(true);
           AsyncStorage.setItem("loginOB", "true");
           AsyncStorage.setItem("email", email);
           AsyncStorage.setItem("pwd", password);
@@ -55,12 +57,34 @@ export default function Login() {
       },
     ]);
   };
+
   const linkToKakao = () => {
-    Linking.openURL("kakaoplus://plusfriend/home/_fZnrK");
+    Alert.alert("비밀번호 변경 안내", "카카오 채널에 문의해주세요", [
+      {
+        text: "이동",
+        onPress: () => {
+          Linking.openURL("kakaoplus://plusfriend/home/_fZnrK");
+        },
+      },
+      {
+        text: "아니요",
+        onPress: () => {
+          null;
+        },
+      },
+    ]);
   };
+
+  useEffect(() => {
+    if (login.error && remember) {
+      AsyncStorage.multiRemove(["email", "pwd"]);
+    }
+  }, [login.error, remember, email, password]);
+
   useEffect(() => {
     resetSignUpDispatch();
   }, []);
+
   useEffect(() => {
     AsyncStorage.getItem("loginOB").then((res) => {
       if (!res) {
@@ -72,6 +96,7 @@ export default function Login() {
       }
     });
   }, []);
+
   useEffect(() => {
     // AsyncStorage.multiRemove(["email", "password", "loginOB", "mainOB"]);
     AsyncStorage.multiGet(["email", "pwd"]).then((res) => {

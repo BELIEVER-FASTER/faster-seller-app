@@ -13,6 +13,10 @@ export default function useProductForm() {
 
   //NOTE: 가격
   const [price, onChangePrice, setPrice] = useInput("");
+  const [dprice, onChangeDPrice, setDPrice] = useInput("");
+  // const onChangePrice = ()=>{
+  //   setPrice(p)
+  // }
 
   //NOTE: 카테고리
   const [cate, setCate] = useState<{
@@ -44,7 +48,7 @@ export default function useProductForm() {
   };
   const [etcCountry, onChangeEtcCountry, setEtcCountry] = useInput("");
 
-  const [leaf, setLeaf] = useState(0);
+  const [leaf, setLeaf] = useState(1);
   const onChangeLeaf = (value: number) => setLeaf(value);
 
   //NOTE: 상세설명

@@ -104,6 +104,14 @@ export const ProdInputBox = styled.View`
   background-color: #eee;
   margin-top: 8px;
   padding: 8px 9px;
+  position: relative;
+`;
+export const PriceTextValue = styled.Text`
+  position: absolute;
+  padding: 2px 9px;
+  background-color: #eee;
+  border-radius: 6px;
+  align-items: center;
 `;
 export const ProdInputText = styled.TextInput<{multiline: boolean}>`
   font-size: 15px;

@@ -10,7 +10,7 @@ import {SignUpContainer, SignUpTitle} from "./styles";
 
 export default function SU1() {
   const navigation = useNavigation();
-  const {email, pwd, pwdCheck} = useSF();
+  const {email, pwd, pwdCheck, resetForm} = useSF();
   const go2 = () => {
     if (!email.email) return Alert.alert("이메일을 입력해주세요.");
     if (!pwd.pwd) return Alert.alert("비밀번호를 입력해주세요.");
@@ -20,6 +20,11 @@ export default function SU1() {
     if (pwdCheck.pwdCheckError) return Alert.alert("비밀번호가 일치하지 않습니다.");
     navigation.navigate("SIGNUP2");
   };
+  React.useEffect(() => {
+    return () => {
+      resetForm();
+    };
+  }, []);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SignUpContainer>

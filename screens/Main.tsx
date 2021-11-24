@@ -43,7 +43,7 @@ export default function Main(): JSX.Element {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: `${login.data?.name} 님의 상품목록`,
+      headerTitle: `${login.data?.name.split("/")[0] || login.data?.name} 님의 상품목록`,
       headerRight: () => (
         <SearchNavBtn>
           <Octicons

@@ -14,6 +14,9 @@ export default function SU6() {
     signup: {data: signUpData},
   } = useAuth();
   const {recommender} = useSF();
+  const go1 = () => {
+    navigation.navigate("SIGNUP7");
+  };
   const go2 = () => {
     if (!signUpData) return;
     addRecommDispatch({userId: signUpData.id, brand: recommender.recommender});
@@ -53,7 +56,7 @@ export default function SU6() {
         </View>
         <View style={{flex: 1}} />
         <DoubleBtnWrapper>
-          <Button title="추천 없음" outlined onPress={go2} width="45%" />
+          <Button title="추천 없음" outlined onPress={go1} width="45%" />
           <Button
             title="추천 있음"
             onPress={go2}

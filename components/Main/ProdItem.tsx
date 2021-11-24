@@ -53,6 +53,7 @@ export default function ProdItem({item}: ProdItemProps): JSX.Element {
       },
     ]);
   };
+  
   const isUpdated = item.UpdatedProduct;
   const isUpdatedTitle = item.UpdatedProduct && item.UpdatedProduct.name !== item.name;
   const isUpdatedPr = item.UpdatedProduct && item.UpdatedProduct.price !== item.price;
@@ -77,7 +78,7 @@ export default function ProdItem({item}: ProdItemProps): JSX.Element {
           </TitleBox>
 
           <Text style={{marginVertical: 5, fontSize: 12}}>
-            {dayjs(item.createdAt).format("YY년 MM월 DD일 HH시 MM분")}
+            {dayjs(item.createdAt).format("YY년 MM월 DD일 HH시 mm분")}
           </Text>
           <TitleBox>
             <PIPrice>

@@ -2,6 +2,7 @@ import axios from "axios";
 import {Category, Color, Store} from "./data";
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "https://api.fstr.shop";
+// axios.defaults.baseURL="http://172.30.1.18:8080"
 
 export const getCateList = async () => {
   try {

@@ -41,10 +41,10 @@ export default function SU4() {
     });
   }, [bank, accName, accNum, recommender]);
   useEffect(() => {
-    if (signup.data) {
+    if (signup.data && bank.bank && accNum.accNum && accName.accName) {
       navigation.navigate("SIGNUP5");
     }
-  }, [signup.data]);
+  }, [signup.data, bank.bank, accNum.accNum, accName.accName]);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SignUpContainer>
