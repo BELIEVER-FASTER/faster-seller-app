@@ -6,6 +6,7 @@ import ProdItem from "./ProdItem";
 import Skelleton from "./Skelleton";
 // import {ProdListEndBox, ProdListEndText} from "./styles";
 
+const renderItem: ListRenderItem<ProdListItem> = ({item}) => <ProdItem item={item} />;
 type ProdListProps = {
   keyword: string;
   sort: FilterType;
@@ -46,9 +47,9 @@ export default function ProdList({keyword, sort}: ProdListProps): JSX.Element {
     setPageDispatch(1);
   }, [keyword, sort]);
 
-  const renderItem: ListRenderItem<ProdListItem> = ({item}) => <ProdItem item={item} />;
   return (
     <FlatList
+      removeClippedSubviews={true}
       refreshing={loadProductList.loading}
       onRefresh={() => setPageDispatch(1)}
       data={loadProductList.data}

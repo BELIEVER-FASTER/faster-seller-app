@@ -48,7 +48,7 @@ export default function SU2() {
   const go2 = () => {
     if (!brand.brand) return Alert.alert("브랜드명을 입력해주세요");
     if (!brand.brand.includes("/"))
-      return Alert.alert("한글패명 / 영문명을 모두 입력해주세요");
+      return Alert.alert("한글명 / 영문명을 모두 입력해주세요");
     if (!storeData.store) return Alert.alert("상가를 입력해주세요");
     if (!location.location) return Alert.alert("위치를 입력해주세요");
     navigation.navigate("SIGNUP3");

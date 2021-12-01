@@ -66,7 +66,7 @@ export default function Edit({route}: DetailData): JSX.Element {
       CategoryMiddleId: cate.cate?.middle.id as number,
       images: images.images,
       name: name.name,
-      price: price.price,
+      price: price.price.split(",").join(""),
       isPiece: leaf.leaf,
       composition: mixture.mixture,
       country: +country.country,
